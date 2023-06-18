@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{#{% block title %}{{ recette.titre }}{% endblock %}#}
+
+{% block body %}
+
+    <h1>{{ recette.titre }}</h1>
+    <p>{{ recette.description|striptags  }}</p>
+    <p>{{ recette.tempsPreparation|date('H:i') }}</p>
+    <p>{{ recette.tempsRepos|date('H:i') }}</p>
+    <p>{{ recette.tempsCuisson|date('H:i') }}</p>
+    <p>{{ recette.Ingredients }}</p>
+    <p>{{ recette.Etapes }}</p>
+    {% if AvisUser is not null %}
+        <p>Vous avez attribué une Note de :{{ AvisUser.Note }} /5 </p>
+    {% else %}
+        <div {{ react_component('RatingRecette', { recetteId: recette.id }) }}></div>
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

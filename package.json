@@ -1,0 +1,42 @@
+{
+    "devDependencies": {
+        "@babel/core": "^7.17.0",
+        "@babel/preset-env": "^7.16.0",
+        "@babel/preset-react": "^7.22.5",
+        "@hotwired/stimulus": "^3.0.0",
+        "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/ux-react": "file:vendor/symfony/ux-react/assets",
+        "@symfony/webpack-encore": "^4.0.0",
+        "autoprefixer": "^10.4.14",
+        "core-js": "^3.23.0",
+        "postcss": "^8.4.24",
+        "postcss-loader": "^7.3.3",
+        "react": "^18.0",
+        "react-dom": "^18.0",
+        "regenerator-runtime": "^0.13.9",
+        "tailwindcss": "^3.3.2",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-notifier": "^1.15.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.1",
+        "@emotion/styled": "^11.11.0",
+        "@headlessui/react": "^1.7.15",
+        "@mui/icons-material": "^5.11.16",
+        "@mui/material": "^5.13.5",
+        "@mui/styled-engine-sc": "^5.12.0",
+        "axios": "^1.4.0",
+        "json-server": "^0.17.3",
+        "react-bootstrap-icons": "^1.8.4",
+        "styled-components": "^5.3.11"
+    }
+}

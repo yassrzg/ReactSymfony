@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ReactController!{% endblock %}
+
+{% block body %}
+    <div {{ react_component('MyComponent', {'fullName' : 'Yass'}) }}></div>
+    <div {{ react_component('Modal') }}></div>
+
+{% endblock %}
