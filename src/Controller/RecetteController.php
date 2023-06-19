@@ -13,10 +13,10 @@ class RecetteController extends AbstractController
     public function index(RecetteRepository $recetteRepository ): Response
     {
         $recette = $recetteRepository->findRecettesWithRecetteUserFalse();
-        dd($recette);
+
 
         return $this->render('recette/index.html.twig', [
-            'controller_name' => 'RecetteController',
+            'recette' => $recette,
         ]);
     }
 }
