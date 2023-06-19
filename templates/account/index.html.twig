@@ -3,5 +3,6 @@
 {% block title %}Hello AccountController!{% endblock %}
 
 {% block body %}
-<h1>Hello mon compte</h1>
+    <h2>Bienvenue sur votre compte {{ app.user.firstname }} {{ app.user.lastname }}</h2>
+    {{ app.user.AllergieUser }}
 {% endblock %}

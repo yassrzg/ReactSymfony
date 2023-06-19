@@ -54,6 +54,9 @@ class Recette
     #[ORM\Column(nullable: true)]
     private ?int $NoteMoyenne = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageRecette = null;
+
     public function __construct()
     {
         $this->Allergie = new ArrayCollection();
@@ -254,6 +257,18 @@ class Recette
     public function setNoteMoyenne(?int $NoteMoyenne): static
     {
         $this->NoteMoyenne = $NoteMoyenne;
+
+        return $this;
+    }
+
+    public function getImageRecette(): ?string
+    {
+        return $this->imageRecette;
+    }
+
+    public function setImageRecette(?string $imageRecette): static
+    {
+        $this->imageRecette = $imageRecette;
 
         return $this;
     }

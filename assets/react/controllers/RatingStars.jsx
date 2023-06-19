@@ -41,6 +41,7 @@ export default function TextRating() {
             <div>
                 {recettes.map((recette) => (
                     <div key={recette.id}>
+                        <img src={`/Uploads/${recette.imageRecette}`} alt="Recette" className="img-recette"/>
                         <p>Titre: {recette.titre}</p>
                         <p>Description: {recette.description.replace(/<[^>]+>/g, '')}</p>
                         <p>Temps de préparation: {new Date(recette.tempsPreparation).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} heure</p>
