@@ -5,10 +5,7 @@ import StarIcon from '@mui/icons-material/Star';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import '../../../public/assets/css/styleReact.css';
-import sablierImage from '../../../public/Image/icons-sablier.png';
-import minuteurImage from '../../../public/Image/icons-minuteur.png';
-import attentionImage from '../../../public/Image/icons-attention.png';
-import { Link } from 'react-router-dom';
+
 
 
 const labels = {

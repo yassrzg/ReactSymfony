@@ -68,10 +68,15 @@
             </div>
 
         </div>
+
     {% if AvisUser is not null %}
-        <p>Vous avez attribué une Note de :{{ AvisUser.Note }} /5 </p>
+        <div class="container-note">
+            <p class="note-user">Vous avez attribué la note de :</p>
+            <div {{ react_component('RatingRecetteId', { noteUser: AvisUser.Note }) }}></div>
+        </div>
     {% else %}
         <div {{ react_component('RatingRecette', { recetteId: recette.id }) }} class="rating-recette"></div>
+         {{ dump(AvisUser) }}
     {% endif %}
     </div>
 

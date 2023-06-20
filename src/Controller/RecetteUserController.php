@@ -142,9 +142,13 @@ class RecetteUserController extends AbstractController
 
             $user = $this->getUser();
             $recetteId = $recette->getId();
+
             $userId = $user->getId();
 
             $avisId = $this->entityManager->getRepository(Avis::class)->findByUserIdAndRecetteId($userId, $recetteId);
+
+            $avis = $avisRepository->findBy(['AvisRecette' => $recette]);
+
 
 
             $content = json_decode($request->getContent());
@@ -161,7 +165,8 @@ class RecetteUserController extends AbstractController
         }
             return $this->render('recette_user/recette.html.twig', [
                 'recette' => $recette,
-                'AvisUser' => $avisId
+                'AvisUser' => $avisId,
+                'avis' => $avis
             ]);
 
     }

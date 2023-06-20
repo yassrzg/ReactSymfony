@@ -443,6 +443,21 @@ body {
     padding: 0 2rem;
 }
 
+#link-recette {
+    color: black;
+    text-decoration: none;
+    outline: none;
+}
+
+.note-user {
+    margin-bottom: 0;
+    margin-top: 1rem;
+}
+
+.container-note {
+    padding-left: 1rem;
+}
+
 
 
 
