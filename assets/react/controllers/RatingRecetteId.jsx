@@ -29,6 +29,9 @@ export default function RatingRecetteId ({noteUser}) {
 
 
             </Box>
+            <div>
+
+            </div>
         </div>
     )
 }

@@ -113,8 +113,6 @@ class RecetteUserController extends AbstractController
             }
         }
 
-
-
         // Enregistrer les modifications dans la base de données
         $this->entityManager->flush();
 
@@ -126,12 +124,6 @@ class RecetteUserController extends AbstractController
 
 
 
-
-
-
-
-
-
     #[Route('/account/recette_patient/{id}', name: 'app_recette_patient_id')]
     public function recetteId($id, Request $request, AvisRepository $avisRepository) {
 
@@ -139,6 +131,7 @@ class RecetteUserController extends AbstractController
             if(!$recette) {
                 return $this->redirectToRoute('app_recette_patient');
             }
+
 
             $user = $this->getUser();
             $recetteId = $recette->getId();

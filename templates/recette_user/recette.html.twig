@@ -75,8 +75,7 @@
             <div {{ react_component('RatingRecetteId', { noteUser: AvisUser.Note }) }}></div>
         </div>
     {% else %}
-        <div {{ react_component('RatingRecette', { recetteId: recette.id }) }} class="rating-recette"></div>
-         {{ dump(AvisUser) }}
+        <div {{ react_component('RatingRecette', { recetteId: recette.id, avis: avis|raw  }) }} class="rating-recette"></div>
     {% endif %}
     </div>
 

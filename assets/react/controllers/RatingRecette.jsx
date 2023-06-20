@@ -25,7 +25,7 @@ function getLabelText(value) {
     return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
 }
 
-export default function HoverRating({ recetteId }) {
+export default function HoverRating({ recetteId, avis }) {
     const [value, setValue] = useState(null);
     const [comment, setComment] = useState('');
     const [showButton, setShowButton] = useState(true);
@@ -90,15 +90,16 @@ export default function HoverRating({ recetteId }) {
     }
 
     return (
-        <Box
-            sx={{
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-        >
-            {submittedRating !== null ? ( // Vérifiez si une note a été soumise
+        <div>
+            <Box
+                sx={{
+                    width: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                {submittedRating !== null ? ( // Vérifiez si une note a été soumise
                     <Rating
                         value={submittedRating}
                         readOnly // Rendre la note en lecture seule
@@ -108,67 +109,95 @@ export default function HoverRating({ recetteId }) {
                     />
                 ) : (
                     <Rating
-                    value={value ? value : 1}
-                    precision={0.5}
-                    getLabelText={getLabelText}
-                    onChange={handleRatingChange}
-                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                />
-            )}
-            {ratingError && (
-                <Typography variant="caption" color="error">
-                    {ratingError}
-                </Typography>
-            )}
-            <Box sx={{ mt: 2, width: '100%' }}>
-                {!formSubmitted && ( // Cacher le composant TextField si le formulaire a été soumis
-                <TextField
-                    label="Commentaire"
-                    variant="outlined"
-                    multiline
-                    rows={4}
-                    value={comment}
-                    onChange={handleCommentChange}
-                    fullWidth
-                />
+                        value={value ? value : 1}
+                        precision={0.5}
+                        getLabelText={getLabelText}
+                        onChange={handleRatingChange}
+                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                    />
                 )}
-            </Box>
-            {commentError && (
-                <Typography variant="caption" color="error">
-                    {commentError}
-                </Typography>
-            )}
-            <Box sx={{ mt: 2 }}>
-                {showButton && !formSubmitted && (
-                    <Button variant="contained" onClick={handleSubmit}>
-                        Soumettre l'avis
-                    </Button>
-                )}
-            </Box>
-            <Modal
-                open={showModal}
-                onClose={() => setShowModal(false)}
-                aria-labelledby="modal-title"
-                aria-describedby="modal-description"
-            >
-                <Box
-                    sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        bgcolor: 'background.paper',
-                        border: '2px solid #000',
-                        boxShadow: 24,
-                        p: 4,
-                    }}
-                >
-                    <Typography id="modal-title" variant="h6" component="h2">
-                        Votre avis a bien été envoyé
+                {ratingError && (
+                    <Typography variant="caption" color="error">
+                        {ratingError}
                     </Typography>
+                )}
+                <Box sx={{ mt: 2, width: '100%' }}>
+                    {!formSubmitted && ( // Cacher le composant TextField si le formulaire a été soumis
+                        <TextField
+                            label="Commentaire"
+                            variant="outlined"
+                            multiline
+                            rows={4}
+                            value={comment}
+                            onChange={handleCommentChange}
+                            fullWidth
+                        />
+                    )}
                 </Box>
-            </Modal>
+                {commentError && (
+                    <Typography variant="caption" color="error">
+                        {commentError}
+                    </Typography>
+                )}
+                <Box sx={{ mt: 2 }}>
+                    {showButton && !formSubmitted && (
+                        <Button variant="contained" onClick={handleSubmit}>
+                            Soumettre l'avis
+                        </Button>
+                    )}
+                </Box>
+                <Modal
+                    open={showModal}
+                    onClose={() => setShowModal(false)}
+                    aria-labelledby="modal-title"
+                    aria-describedby="modal-description"
+                >
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            bgcolor: 'background.paper',
+                            border: '2px solid #000',
+                            boxShadow: 24,
+                            p: 4,
+                        }}
+                    >
+                        <Typography id="modal-title" variant="h6" component="h2">
+                            Votre avis a bien été envoyé
+                        </Typography>
+                    </Box>
+                </Modal>
 
-        </Box>
+            </Box>
+            <div>
+                {avis.map((avisItem) => (
+                    <div key={avisItem.id} className="avis-item">
+                        <div className="note">
+                            <Box
+                                sx={{
+                                    width: 200,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                }}
+                            >
+                                <Rating
+                                    name={`rating-${avisItem.id}`}
+                                    value={avisItem.Note}
+                                    readOnly
+                                    precision={0.5}
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                />
+                                <Box sx={{ ml: 2 }}>{labels[avisItem.Note]}</Box>
+                            </Box>
+                        </div>
+                        <div className="description">
+                            <p>{avisItem.Description}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
     );
 }
