@@ -92,7 +92,7 @@ export default function HoverRating({ recetteId }) {
     return (
         <Box
             sx={{
-                width: 200,
+                width: '100%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -120,7 +120,7 @@ export default function HoverRating({ recetteId }) {
                     {ratingError}
                 </Typography>
             )}
-            <Box sx={{ mt: 2 }}>
+            <Box sx={{ mt: 2, width: '100%' }}>
                 {!formSubmitted && ( // Cacher le composant TextField si le formulaire a été soumis
                 <TextField
                     label="Commentaire"
@@ -129,6 +129,7 @@ export default function HoverRating({ recetteId }) {
                     rows={4}
                     value={comment}
                     onChange={handleCommentChange}
+                    fullWidth
                 />
                 )}
             </Box>

@@ -5,7 +5,49 @@
 {% block body %}
 
 
-        <div {{ react_component('RatingStars') }}"></div>
+        <div id="container-Recette">
+                {% for recette in recettes %}
+                        <div class="containerRecette">
+                                <div class="container-img">
+                                        <img src="/Uploads/{{ recette.imageRecette }}" alt="Recette" class="imgRecette"/>
+                                </div>
+                                <div class="container-description">
+                                        <h2>{{ recette.titre }}</h2>
+                                        <div class="container-time">
+                                                <div class="time">
+                                                        <img src="{{  asset('Image/icons-sablier.png') }}" alt="iconSablier" />
+                                                        <p>Préparation:</p>
+                                                        <p>{{ recette.tempsPreparation|date('H:i') }} heure</p>
+                                                </div>
+                                                <div class="time">
+                                                        <img src="{{  asset('Image/icons-minuteur.png') }}" alt="minuteurImage" />
+                                                        <p>Cuisson:</p>
+                                                        <p>{{ recette.tempsCuisson|date('H:i') }} heure</p>
+                                                </div>
+                                        </div>
+                                        <div class="allergie">
+                                                <img src="{{ asset('Image/icons-attention.png') }}" alt="attention">
+                                                <p>ALLERGIE</p>
+                                        </div>
+                                        <div class="container-allergie">
+                                                {% for allergie in recette.Allergie %}
+                                                        <p>{{ allergie.name }}</p>
+                                                {% endfor %}
+                                        </div>
+                                </div>
+                                <div>
+                                        <div {{ react_component('RatingStars', { noteMoyenne: recette.NoteMoyenne }) }} class="rating-recette"></div>
+                                </div>
+                        </div>
+
+                {% endfor %}
+
+
+                {#                <div {{ react_component('RatingStars') }}"></div>#}
+        </div>
+
+
+
 
 
 

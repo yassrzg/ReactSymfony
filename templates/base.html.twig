@@ -40,13 +40,20 @@
                         <a class="nav-link" href="{{ path('app_home') }}">Accueil <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('app_recette') }}">Nos Recette <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('app_recette') }}">Nos Recettes <span class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item active">
-                    {% if is_granted('ROLE_ADMIN') and app.user %}
-                        <a class="nav-link" href="{{ path('app_register') }}">Inscrire un patient</a>
+                    {% if app.user %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('app_recette_patient') }}">Mes Recettes<span class="sr-only">(current)</span></a>
+                        </li>
                     {% endif %}
-                    </li>
+
+                    {% if is_granted('ROLE_ADMIN') and app.user %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('app_register') }}">Inscrire un patient</a>
+                        </li>
+                    {% endif %}
+
                 </ul>
                 <div class="navbar-item-custom">
                     {% if app.user %}
@@ -60,7 +67,6 @@
             </div>
         </nav>
     </header>
-
 
         <div class="mt-5">
         {% block body %}{% endblock %}

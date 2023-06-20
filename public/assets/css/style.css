@@ -1,0 +1,1514 @@
+/* FONT */
+
+@font-face {
+     font-family: 'Hind Madurai';
+    src: url("../../fonts/HindMadurai-Medium.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lora';
+    src: url("../../fonts/static/Lora-Medium.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url("../../fonts/static/Montserrat-Medium.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-italic';
+    src: url("../../fonts/static/Montserrat-LightItalic.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Dancing';
+    src: url("../../fonts/static/DancingScript-Bold.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* Balise html css */
+
+p {
+    font-family: 'Hind Madurai';
+}
+
+h3,h4 {
+    font-family: 'Lora';
+}
+
+h1,h2 {
+    font-family: 'Montserrat';
+}
+
+body {
+    margin: 0;
+    padding: 0 !important;
+    overflow-x: hidden;
+    color: black !important;
+}
+
+
+/* REACT */
+
+.img-recette {
+    width: 300px;
+}
+
+
+
+/* HOME PAGE */
+
+#logo {
+    height: 15rem;
+    width: 100%;
+    background-color: #0f3d3e;
+}
+
+#logo .container-logo {
+    width: 100%;
+    height: 100%;
+    padding: 0 10rem;
+}
+#logo img {
+    margin-top: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+#container-home {
+    padding: 0 10%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+}
+
+#container-presentation, #container-contact-home {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.img-presentation {
+    float: left;
+    width: 50%;
+}
+
+.img-presentation img {
+    width: 80%;
+    border-radius: 2rem 10rem 6rem 4rem;
+}
+
+.presentation {
+    float: right;
+    width: 50%;
+    text-align: justify;
+}
+
+.presentation p, .contact p {
+    margin-top: 1rem;
+    font-family: Dancing, sans-serif;
+    font-size: 1.2rem;
+}
+.presentation h3, .contact h3 {
+    font-family: Lora ;
+}
+
+.contact {
+    float: left;
+    width: 50%;
+    margin-right: 2rem;
+}
+
+.img-contact {
+    float: right;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.img-contact img {
+    width: 90%;
+    border-radius: 8rem 2rem 6rem 2rem;
+}
+
+.mt-contact {
+    margin-top: 5rem;
+}
+
+.btn-contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-contact button {
+    padding: 0.5rem 1rem;
+}
+
+#offre {
+    margin-top: 5rem;
+}
+
+#container-offre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4rem;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(100px);
+    -moz-backdrop-filter: blur(100px);
+    width: 100%;
+}
+
+.container-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 25%;
+    flex-wrap: wrap;
+}
+
+.icon-offre {
+    width: 4rem;
+}
+
+#reseaux-sociaux {
+    margin-top: 5rem;
+    width: 100%;
+}
+
+#reseaux-sociaux h3 {
+    font-family: Lora;
+}
+#reseaux-sociaux p {
+    margin-top: 3rem;
+    width: 100%;
+    padding: 0 2rem;
+    text-align: justify;
+    font-family: Dancing;
+    font-size: 1.2rem;
+}
+
+.container-reseaux {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.reseaux-sociaux {
+    width: 2rem;
+    cursor: pointer;
+}
+
+
+/* RECETTE */
+
+#container-recette {
+    padding: 0 7%;
+    margin-top: 20rem;
+}
+
+/* RECETTE ID */
+
+#recette-id {
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    padding: 0 7%;
+}
+
+#container-recette-id {
+    display: flex;
+    justify-content: center;
+}
+
+.container-recette-description {
+    float: right;
+    width: 50%;
+}
+.container-img-recette {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    float: left;
+    width: 50%;
+
+}
+
+.img-recette-id {
+    width: 100%;
+}
+
+.img-recette-id img {
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.times-recette {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.times-recette-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+.times-recette-content img {
+    width: 30px;
+}
+
+.description-recette-div {
+    margin-left: 2rem;
+}
+
+.recette-titre {
+    font-family: Lora;
+    margin-bottom: 2rem;
+}
+
+.text-description {
+
+    font-family: Montserrat;
+}
+
+.recette-regime {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.recette-regime img{
+    width: 30px;
+}
+
+.recette-regime p {
+    margin-bottom: 0;
+    margin-left: 1rem;
+}
+
+.recette-allergie {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+.recette-allergie img {
+    width: 20px;
+}
+.recette-allergie p {
+    margin-bottom: 0;
+    margin-left: 1rem;
+}
+
+.recette-ingredient {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.recette-ingredient p {
+    margin-left: 1rem;
+    margin-bottom: 0;
+}
+.recette-ingredient img {
+    width: 20px;
+}
+
+.recette-etape {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+.recette-etape p {
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+}
+.img-food {
+    width: 30px;
+}
+
+.ml05 {
+    margin-left: 0.5rem;
+}
+
+.mr05 {
+    margin-right: 0.5rem;
+}
+
+.rating-recette {
+    margin-top: 2rem;
+}
+
+.img-terminer {
+    width: 30px;
+}
+
+
+#container-Recette {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crée 3 colonnes égales */
+    grid-gap: 2rem; /* Espacement entre les éléments de la grille */
+    padding: 0 8%;
+    margin-top: 10%;
+
+}
+
+.containerRecette {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 4rem;
+    box-shadow: 15px 0px 100px rgba(5, 5, 5, 0.3);
+    border-radius: 0.5rem;
+}
+
+.container-img {
+    width: 100%;
+    height: 300px;
+}
+
+.imgRecette {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.container-allergie {
+    margin-top: 1rem;
+    display: flex;
+    padding: 0 2rem;
+
+}
+.container-allergie p{
+    margin-right: 1rem;
+
+}
+
+.container-description {
+    padding-top: 3rem;
+    width: 100%;
+}
+.container-description h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.container-time {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.time img {
+    margin-bottom: 1rem;
+    width: 30px;
+}
+
+.allergie {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding: 0 2rem;
+}
+.allergie p {
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+}
+.allergie img {
+    width: 20px;
+}
+
+.padding1 {
+    padding: 0 2rem;
+}
+
+
+
+
+    /* ACCEUIL HOME */
+
+#acceuil {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../imgTest/restaurant3.jpg");
+    background-size: cover;
+}
+.star {
+    font-size: 35px;
+    color: gold;
+}
+
+
+#acceuil-container {
+
+}
+
+.acceuil-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.btn-reservation-acceuil {
+    background-color: black;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.btn-menu-acceuil {
+    background-color: darkorange;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.title-home {
+    font-weight: 700;
+    font-size: 100px;
+    letter-spacing: 3px;
+    color: white;
+    font-family: 'Montserrat-italic';
+}
+
+.produit-content {
+    margin-bottom: 4rem;
+    padding: 1rem 10rem;
+}
+
+
+.title-produit {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+
+}
+.btn-reservation-formule {
+    background-color: #906427;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    border: none;
+}
+
+.title-page {
+    margin-bottom: 5rem;
+}
+
+#formule-background {
+    background-image: url("../../imgTest/restaurant4.jpg");
+    background-size: cover;
+    padding: 1rem 0;
+}
+.card-produit{
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    background-color: #dbd3c9;
+    border: none;
+    height: 20rem;
+    overflow: hidden;
+    position: relative;
+    /*#b1834b*/
+}
+.card-produit-home{
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    border: none;
+    height: 15rem;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(20px);
+    box-shadow: 0px 1px 10px 0 rgba(0, 0, 0, .6);
+    /*#b1834b*/
+}
+
+.svg-user  {
+    width: 30px;
+    margin-right: 0.5rem;
+}
+
+.card-produit img {
+    border-radius: 2rem;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* best Menu */
+
+#img-best {
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+}
+
+#background-bestMenu {
+    background-image: url("../../imgTest/bestMenu.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.card-best {
+    margin-bottom: 4rem;
+    border-radius: 0.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.card-produit-content {
+    margin-left: 3rem;
+    padding: 1rem;
+    float: right;
+    width: 65%;
+}
+#img {
+    position: relative;
+    height: 100%;
+    float: left;
+    width: 40%;
+}
+.img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 2rem;
+}
+
+.btn-voir-menu {
+    background-color: #906427;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1rem;
+    border: none;
+    position: absolute;
+    bottom: 5%;
+    right: 16%;
+    text-decoration: none;
+}
+.btn-voir-menu:hover {
+    text-decoration: none;
+    color: black;
+}
+
+#hours {
+    border-radius: 0.5rem;
+    background-color: #dbd3c9;
+    border: none;
+    padding: 1.5rem;
+
+}
+
+.btn-reservation {
+    background-color: #906427;
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 1rem;
+    border: none;
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+}
+
+#menu-title-container {
+    background-image: url("../../imgTest/restaurant5.webp");
+    height: 40vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#menu-title-container p {
+    font-family: Dancing;
+    color: white;
+    font-size: 1.5rem;
+}
+.reservation-btn:hover {
+    text-decoration: none;
+    outline: none;
+    color: black;
+}
+
+#title-img-produit {
+    position: absolute;
+    left: 22%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+    color: white;
+    display: none;
+    width: fit-content;
+}
+
+button a {
+    color: white;
+}
+
+/* FORMULE /MENU */
+
+#title-img {
+    position: absolute;
+    left: 20%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    display: none;
+
+}
+#formule {
+    margin-top: 5rem;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    border: none;
+    backdrop-filter: blur(100px);
+}
+
+.formule img{
+    height: 18rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.formule {
+    padding: 2rem;
+}
+
+.formule-card {
+    border-radius: 0.5rem;
+}
+
+
+.day-hours {
+    display: flex;
+    justify-content: center;
+}
+
+.hours-jours {
+    display: flex;
+    font-weight: bold;
+}
+
+.hours {
+    margin-right: 4rem;
+}
+
+.span-hours {
+    width: 15%;
+    background-color:black;
+    height: 3px;
+    border-radius: 3rem;
+}
+
+iframe {
+    border-radius: 0.5rem;
+    width: 90%;
+}
+
+
+.span-content-hours {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 4rem;
+    align-items: center;
+}
+
+
+.reservation-date {
+    display: flex;
+}
+
+
+.reservation-allergie {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    padding-left: 0 !important;
+}
+#reservation_allergie .form-check {
+font-size: 0.6rem;
+    padding-left: 0;
+}
+
+#reservation_Heure {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+#reservation_Heure div.form-check {
+    margin-bottom: 1rem;
+}
+
+fieldset {
+    margin-top: 2rem;
+}
+
+#reservation_allergie label{
+    border: 3px white solid;
+    padding: 0.5rem 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    float: left;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#reservation_allergie input[type="checkbox"]{
+    display: none;
+}
+
+
+#reservation_allergie input[type="checkbox"]:checked + label{
+    background: green;
+    color: white;
+}
+
+
+#reservation_Heure label{
+    border: 3px white solid;
+    padding: 0.5rem 2rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    float: left;
+    font-size: 1em;
+    cursor: pointer;
+}
+#reservation_Heure input[type="radio"]{
+    display: none;
+}
+
+ #reservation_Heure input[type="radio"]:checked + label{
+    background: black;
+    color: #B04AB3;
+}
+
+ .btn-rez {
+     padding: 1rem 2rem;
+
+ }
+ .btn-rez-countainer {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+ }
+
+ .margin-top {
+     margin: 3rem 0;
+     padding: 0 10%;
+ }
+
+ .cgu-text {
+     text-align: justify;
+ }
+
+ .img-description {
+     width: 50%;
+     border-radius: 0.5rem;
+ }
+ .img-container-description {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     margin-top: 2rem;
+ }
+
+
+
+ #hours-form legend {
+    text-align: center;
+ }
+
+ #btn-back-home {
+     display: none;
+ }
+
+
+ /* LOGIN */
+
+#form-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    height: auto;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 15px 0px 100px rgba(5, 5, 5, 0.3);
+    background-color: #ffffff;
+    margin: 60px auto;
+
+
+}
+
+
+#form-content-login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    width: 100%;
+}
+
+#logo-login {
+    width: 150px;
+    height: auto;
+    margin-bottom: 40px;
+    border-radius: 15%;
+}
+.cgu {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+ul {
+    list-style-type: none;
+}
+
+.apropos {
+    text-transform: uppercase;
+}
+footer {
+    background-color: #6c757d;
+    padding-top:1rem ;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+}
+footer ul {
+    margin-bottom: 0;
+}
+
+footer a:hover {
+    text-decoration: none;
+    color: black;
+}
+footer li {
+    margin-bottom: 1rem;
+}
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ul-container {
+    margin-right: 5rem;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.h2-login  {
+    margin-bottom: 60px;
+    text-align: center;
+    font-size: 30px;
+    font-family: Poppins, sans-serif;
+}
+
+
+.title-caroussel {
+    font-family:'Dancing';
+}
+.form-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    width: 100%;
+}
+.reservation-confirmation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10%;
+}
+
+
+/* Caroussel */
+
+#myCarousel {
+    border-radius: 0.5rem;
+    padding: 0 5rem;
+}
+.carousel-inner {
+    border-radius: 0.5rem;
+
+}
+
+.btn-caroussel {
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    background-color: transparent;
+    backdrop-filter: blur(100px);
+    border: none;
+    color: white;
+    border-radius: 0.5rem;
+}
+/* BTN */
+
+
+.btn-voir-produit {
+    border-radius: 0.5rem;
+}
+
+
+.button-1-login {/*
+    padding: 10px 40px;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #6b6666;
+    color: white;
+    */
+    position: relative;
+    display: inline-block;
+    padding: 10px 0;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s ease-in-out;
+    letter-spacing: 4px;
+    margin-right: 15px;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.button-1-login:hover {
+    /*
+    background-color: black;
+    color: white;
+    */
+    background: #03f40f;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03f40f,
+    0 0 25px #03f40f,
+    0 0 50px #03f40f,
+    0 0 100px #03f40f;
+}
+
+.button-1-login span {
+    position: absolute;
+    display: block;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+
+    50%,100% {
+        left: 100%;
+    }
+}
+
+.button-1-login span:nth-child(1) {
+    bottom: 0px;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #03f40f);
+    animation: btn-anim1 4s linear infinite;
+}
+
+a {
+    text-decoration:none ;
+    color: white;
+}
+
+
+
+
+.link-cnx {
+    color: #292934;
+    margin-top: 1rem;
+    font-size: small;
+}
+
+.btn-login {
+    width: 80%;
+    margin-top: 2rem;
+}
+
+.button-3-login{
+    width: 50%;
+    margin-top:1rem;
+    margin-bottom:20px;
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #252525;
+    color: white;
+}
+
+.button-3-login:hover {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    outline: none;
+}
+
+
+
+/* UI LOGIN */
+.field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 10px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: black;
+    background-color: white;
+    box-shadow:  2px 5px 10px rgb(5, 5, 5, 0.4);
+    margin-bottom: 30px;
+    width: 80%;
+}
+
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: black;
+}
+
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: black;
+}
+
+
+
+.form-box h2 {
+    margin-bottom: 2.5rem;
+}
+.form-content-reservation {
+    padding:2% 20%;
+}
+
+.mbottom {
+    margin-bottom: 10%;
+}
+
+.mleft {
+    margin-left: 5%;
+}
+
+
+
+/* SIGNIN */
+#form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 5%;
+    padding: 0 20%;
+}
+#form-content {
+   border-radius: 0.5rem;
+    box-shadow: 2px 5px 10px rgb(5, 5, 5);
+    padding: 2rem 5rem;
+    width: 90%;
+    background-color: #ffffff;
+}
+
+.padding-left {
+    padding-left: 2.5rem;
+}
+
+.padding-right {
+    padding-right: 2.5rem;
+}
+
+.btn-sign-in {
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+.inscription {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inscription a {
+    color: black;
+    margin-left: 1rem;
+    font-size: small;
+}
+
+
+
+.form-reservation-content {
+    box-shadow: 15px 15px 10px rgba(5, 5, 5, 0.3);
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 4rem 7rem;
+}
+
+
+
+#reservation_allergie {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#btn-setting {
+    margin-left: 1rem;
+
+}
+.card-body {
+    width: 60%;
+}
+
+.p-description{
+    height: 7.5rem;
+    overflow: hidden;
+}
+
+
+.clamped-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.clamped-text2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.clamped-text3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.clamped-text1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.clamped-text5 {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+/* LOGO */
+
+.img-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5rem 0;
+}
+
+#img-logo-nav {
+    display: none;
+}
+
+footer img {
+    width: 30px;
+}
+
+/* MEDIA QUERRIES PHONE */
+
+@media (max-width: 767px) {
+
+    .title-home {
+        font-size: 1rem;
+    }
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    a {
+        font-size: 0.6rem;
+    }
+    .btn-voir-menu {
+        right: 25%;
+        padding: 0.7rem;
+    }
+    .btn-reservation {
+        padding: 0.7rem 1rem;
+        right: 5%;
+    }
+
+    .card-produit-content p {
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .card-produit-content div.text-center {
+        margin-top: 0rem !important;
+    }
+    .card-produit-content h3 {
+        font-size: 1rem;
+        margin-bottom: 1rem !important;
+    }
+
+    .card-produit-content {
+        margin-left: 0rem;
+        padding-top: 0;
+    }
+
+    .produit-content {
+        padding: 0 1rem;
+    }
+    .card-produit {
+        height: 12rem;
+    }
+    div.card-produit h3{
+        font-size: 0.9rem;
+        margin-bottom: 1rem !important;
+    }
+    div.card-produit div.card-body {
+        padding-top: 0;
+        padding-right: 0;
+        padding-bottom: 0;
+        padding-left: 0.5rem;
+    }
+    div.card-produit div.card-body p {
+        font-size: 0.8rem;
+    }
+
+    .produit-price {
+        margin-bottom: 0;
+    }
+
+    footer img {
+        width: 20px;
+    }
+    .title-caroussel {
+        padding: 0 1rem;
+        font-size: 1rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    #menu-title-container h1 {
+        margin-bottom: 1rem !important;
+    }
+    #menu-title-container p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .btn-reservation-acceuil, .btn-menu-acceuil {
+        font-size: 0.8rem;
+    }
+
+    #myCarousel  {
+        padding: 0;
+    }
+    #formule-background {
+        padding: 1rem;
+    }
+    #formule-background div.col {
+        margin-bottom: 2.5rem;
+    }
+    #formule-background div.col h6 {
+        margin-bottom: 1rem !important;
+    }
+    .card-produit-home {
+        height: 10rem;
+    }
+
+    #bestMenu-content {
+        width: 100%;
+        margin: 0;
+    }
+    .form-content-reservation {
+        padding: 2% 10%;
+        margin-bottom: 10rem;
+    }
+    .cgu-text {
+        padding: 0 10%;
+    }
+    .img-container-description {
+        margin-bottom: 10rem;
+    }
+
+    iframe {
+        width: 100%;
+    }
+    #hours div.col-lg-4 {
+        padding: 0 1rem !important;
+    }
+    #hours div.col-lg-4 div.mt-5 {
+        margin-top: 2rem !important;
+    }
+    #hours {
+        margin-bottom: 10rem;
+    }
+    .btn-caroussel {
+        font-size: 0.8rem;
+    }
+
+    #img-logo-nav {
+        width: 110px;
+        background-color: white;
+        border-radius: 0.5rem;
+        display: block;
+    }
+    #navbar-phone {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    #container-img-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar-toggler {
+        font-size: 1.5rem;
+        margin-left: 1rem;
+    }
+
+    .df-home {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .hours {
+        margin-bottom: 1rem;
+        margin-right: 2rem;
+    }
+    .day-hours {
+        flex-wrap: wrap;
+    }
+    #form-login {
+        width: 100%;
+        padding: 30px 0;
+    }
+
+    .container {
+        padding: 0;
+    }
+    .form-box {
+        margin-left: 0;
+    }
+
+    .pd-1 {
+        padding: 0;
+    }
+    #form-content {
+        padding: 2rem ;
+        width: 100%;
+    }
+
+    .inscription {
+        flex-wrap: wrap;
+    }
+    .form-reservation-content {
+        padding: 2rem 1rem;
+    }
+    .btn-phone {
+        text-align: center;
+        margin: auto;
+        margin-top: 1rem;
+    }
+
+    .clamped-text3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    element.style {
+    }
+
+    div.card-produit div.card-body p {
+        font-size: 0.8rem;
+    }
+        .clamped-text5 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+}

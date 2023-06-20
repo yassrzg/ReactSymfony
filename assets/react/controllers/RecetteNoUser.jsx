@@ -4,6 +4,10 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import '../../../public/assets/css/styleReact.css';
+import sablierImage from '../../../public/Image/icons-sablier.png';
+import minuteurImage from '../../../public/Image/icons-minuteur.png';
+import attentionImage from '../../../public/Image/icons-attention.png';
 
 const labels = {
     0.5: 'Useless',
@@ -19,7 +23,7 @@ const labels = {
     7: 'SUper'
 };
 
-export default function TextRating() {
+export default function RecetteNoUser() {
 
     const [recettes, setRecettes] = useState([]);
     useEffect(() => {
@@ -34,49 +38,67 @@ export default function TextRating() {
 
     const value = 3;
     return (
-        <div>
-            <div>
-                {recettes.map((recette) => (
-                    <div key={recette.id}>
-                        <div>
-                            <img src={`/Uploads/${recette.imageRecette}`} alt="Recette" className="img-recette"/>
-                        </div>
-                        <div>
-                            <p>Titre: {recette.titre}</p>
-                            <p>Description: {recette.description.replace(/<[^>]+>/g, '')}</p>
-                            <p>Temps de préparation: {new Date(recette.tempsPreparation).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} heure</p>
-                            <p>Temps de repos: {new Date(recette.tempsRepos).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} heure</p>
-                            <p>Temps de cuisson: {new Date(recette.tempsCuisson).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} heure</p>
-                            <p>Ingrédients: {recette.Ingredients}</p>
-                            <p>Étapes: {recette.Etapes}</p>
-                            <Box
-                                sx={{
-                                    width: 200,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                }}
-                            >
-                                {recette.NoteMoyenne ? (
-                                    <>
-                                        <Rating
-                                            name="text-feedback"
-                                            value={recette.NoteMoyenne}
-                                            readOnly
-                                            precision={0.5}
-                                            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                                        />
 
-                                        <Box sx={{ ml: 2 }}>{labels[recette.NoteMoyenne]}</Box>
-                                    </>
-                                ) : (
-                                    <p>Pas encore de note</p>
-                                )}
-                            </Box>
+            <div id="container-Recette">
+                {recettes.map((recette) => (
+                    <div key={recette.id} className="containerRecette">
+                        <div className="container-img">
+                            <img src={`/Uploads/${recette.imageRecette}`} alt="Recette" className="imgRecette"/>
+                        </div>
+                        <div className="container-description">
+                            <h2>{recette.titre}</h2>
+                            <div className="container-time">
+                                <div className="time">
+                                    <img src={sablierImage} alt="iconSablier" />
+                                    <p>Préparation:</p>
+                                    <p>{new Date(recette.tempsPreparation).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} heure</p>
+                                </div>
+                                <div className="time">
+                                    <img src={minuteurImage} alt="minuteurImage" />
+                                    <p>Cuisson:</p>
+                                    <p>{new Date(recette.tempsCuisson).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} heure</p>
+                                </div>
+                            </div>
+                            <div className="allergie">
+                                <img src={attentionImage} alt="iconAttention" />
+                                <p>ALLERGIE</p>
+                            </div>
+
+                            <div className="container-allergie">
+                                {recette.Allergie.map((allergie) => (
+                                    <p key={allergie.id}>{allergie.name}</p>
+                                ))}
+                            </div>
+                            <div className="note">
+                                <Box
+                                    sx={{
+                                        width: 200,
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    {recette.NoteMoyenne ? (
+                                        <>
+                                            <Rating
+                                                name="text-feedback"
+                                                value={recette.NoteMoyenne}
+                                                readOnly
+                                                precision={0.5}
+                                                emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                            />
+
+                                            <Box sx={{ ml: 2 }}>{labels[recette.NoteMoyenne]}</Box>
+                                        </>
+                                    ) : (
+                                        <p className="padding1">Pas encore de note</p>
+                                    )}
+                                </Box>
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
 
-        </div>
+
     );
 }

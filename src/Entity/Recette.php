@@ -31,11 +31,7 @@ class Recette
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $tempsCuisson = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Ingredients = null;
 
-    #[ORM\Column(length: 500)]
-    private ?string $Etapes = null;
 
     #[ORM\ManyToMany(targetEntity: Allergie::class, inversedBy: 'recettes')]
     private Collection $Allergie;
@@ -57,11 +53,21 @@ class Recette
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageRecette = null;
 
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recettes')]
+    private Collection $Ingredient;
+
+    #[ORM\ManyToMany(targetEntity: Etapes::class, inversedBy: 'recettes')]
+    private Collection $Etape;
+
+
+
     public function __construct()
     {
         $this->Allergie = new ArrayCollection();
         $this->Regime = new ArrayCollection();
         $this->avis = new ArrayCollection();
+        $this->Ingredient = new ArrayCollection();
+        $this->Etape = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -134,29 +140,6 @@ class Recette
         return $this;
     }
 
-    public function getIngredients(): ?string
-    {
-        return $this->Ingredients;
-    }
-
-    public function setIngredients(string $Ingredients): static
-    {
-        $this->Ingredients = $Ingredients;
-
-        return $this;
-    }
-
-    public function getEtapes(): ?string
-    {
-        return $this->Etapes;
-    }
-
-    public function setEtapes(string $Etapes): static
-    {
-        $this->Etapes = $Etapes;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Allergie>
@@ -272,4 +255,53 @@ class Recette
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredient(): Collection
+    {
+        return $this->Ingredient;
+    }
+
+    public function addIngredient(Ingredient $ingredient): static
+    {
+        if (!$this->Ingredient->contains($ingredient)) {
+            $this->Ingredient->add($ingredient);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        $this->Ingredient->removeElement($ingredient);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Etapes>
+     */
+    public function getEtape(): Collection
+    {
+        return $this->Etape;
+    }
+
+    public function addEtape(Etapes $etape): static
+    {
+        if (!$this->Etape->contains($etape)) {
+            $this->Etape->add($etape);
+        }
+
+        return $this;
+    }
+
+    public function removeEtape(Etapes $etape): static
+    {
+        $this->Etape->removeElement($etape);
+
+        return $this;
+    }
+
 }
