@@ -8,37 +8,86 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 
-const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
+import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
+import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+    // ICON RATING
+
+const StyledRating = styled(Rating)(({ theme }) => ({
+    '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
+        color: theme.palette.action.disabled,
+    },
+}));
+
+const customIcons = {
+    1: {
+        icon: <SentimentVeryDissatisfiedIcon color="error" />,
+        label: 'Very Dissatisfied',
+    },
+    2: {
+        icon: <SentimentDissatisfiedIcon color="error" />,
+        label: 'Dissatisfied',
+    },
+    3: {
+        icon: <SentimentSatisfiedIcon color="warning" />,
+        label: 'Neutral',
+    },
+    4: {
+        icon: <SentimentSatisfiedAltIcon color="success" />,
+        label: 'Satisfied',
+    },
+    5: {
+        icon: <SentimentVerySatisfiedIcon color="success" />,
+        label: 'Very Satisfied',
+    },
 };
 
-function getLabelText(value) {
-    return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+function IconContainer(props) {
+    const { value, ...other } = props;
+    return <span {...other}>{customIcons[value].icon}</span>;
 }
+
+
+IconContainer.propTypes = {
+    value: PropTypes.number.isRequired,
+};
+
+
+
+
+
+    // ALERT
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function HoverRating({ recetteId }) {
     const [value, setValue] = useState(null);
     const [comment, setComment] = useState('');
     const [showButton, setShowButton] = useState(true);
-    const [showModal, setShowModal] = useState(false);
     const [ratingError, setRatingError] = useState('');
     const [commentError, setCommentError] = useState('');
     const [submittedRating, setSubmittedRating] = useState(null);
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [avis, setAvis] = useState([]);
+    const [open, setOpen] = useState(false);
+
+    // JE RÉCUPÈRE LA DATA DE TOUS LES AVIS AVEC MON AXIOS GET
 
     useEffect(() => {
         axios
-            .get('https://127.0.0.1:8000/api/getAvis')
+            .get('/api/getAvis')
             .then((response) => {
                 setAvis(response.data);
                 console.log(avis);
@@ -48,10 +97,12 @@ export default function HoverRating({ recetteId }) {
             });
     }, []);
 
+    // JE FILTRE LES AVIS SELON L'ID DE LA RECETTE QUE JE RÉCUPÈRE EN PROPS
     function getAvisByRecetteId(recetteId) {
         return avis.filter((avisItem) => avisItem.AvisRecette && avisItem.AvisRecette.id === recetteId);
     }
 
+    // J'ATTRIBUE UNE NOUVELLE DATA À LA SELECTION DE MES ÉTOILES POUR NOTIFIER L'AVIS
 
     function handleRatingChange(event, newValue) {
         event.preventDefault();
@@ -59,12 +110,27 @@ export default function HoverRating({ recetteId }) {
         setRatingError('');
     }
 
+    // JE RÉCUPÈRE LA DATA DU COMMENTAIRE
+
     function handleCommentChange(event) {
         setComment(event.target.value);
         setCommentError('');
     }
 
-    function handleSubmit() {
+    // FERMER LA NOTIFICATION
+
+    const handleCloseNotification = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+
+    };
+
+    // JE VÉRIFIE QUE LA NOTE ET LE COMMENTAIRE ON ÉTAIT QUANTIFIÉ AVANT DE SUBMIT LE FORM
+
+    function handleSubmit(e) {
         if (!value) {
             setRatingError('Vous devez attribuer une note.');
             return;
@@ -74,36 +140,44 @@ export default function HoverRating({ recetteId }) {
             setCommentError('Vous devez écrire un commentaire.');
             return;
         }
+        if(comment && value) {
+            e.preventDefault();
 
-        setShowButton(false);
-        setFormSubmitted(true);
+            setShowButton(false);
+            setFormSubmitted(true);
+            setOpen(true);
 
-        axios
-            .post(`https://127.0.0.1:8000/account/recette_patient/${recetteId}`, {
-                recetteId: recetteId,
-                note: value,
-                description: comment,
-            })
-            .then((response) => {
-                const newAvis = {
-                    id: recetteId,
-                    Note: value,
-                    Description: comment,
-                };
+            axios
+                .post(`https://127.0.0.1:8000/account/recette_patient/${recetteId}`, {
+                    recetteId: recetteId,
+                    note: value,
+                    description: comment,
 
-                setAvis((prevAvis) => [...prevAvis, newAvis]);
-                setSubmittedRating(value);
 
-                setShowModal(true);
+                })
+                .then((response) => {
+                    const newAvis = {
+                        id: recetteId,
+                        Note: value,
+                        Description: comment,
 
-                setValue(null);
-                setComment('');
-                setShowButton(true);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+
+                    };
+
+                    setAvis((prevAvis) => [...prevAvis, newAvis]);
+                    setSubmittedRating(value);
+
+                    setValue(null);
+                    setComment('');
+                    setShowButton(true);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
     }
+
+    // LORS DU SUBMIT JE RÉCUPÈRE UNE NOUVELLE FOIS L'ID DE LA RECETTE SELON L'AVIS
 
     useEffect(() => {
         const avisByRecette = getAvisByRecetteId(recetteId);
@@ -122,19 +196,10 @@ export default function HoverRating({ recetteId }) {
                     alignItems: 'center',
                 }}
             >
-                {submittedRating !== null ? (
-                    <Rating
-                        value={submittedRating}
-                        readOnly
-                        precision={0.5}
-                        getLabelText={getLabelText}
-                        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                    />
-                ) : (
+                {!formSubmitted &&  (
                     <Rating
                         value={value ? value : 1}
                         precision={0.5}
-                        getLabelText={getLabelText}
                         onChange={handleRatingChange}
                         emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                     />
@@ -169,35 +234,24 @@ export default function HoverRating({ recetteId }) {
                         </Button>
                     )}
                 </Box>
-                <Modal
-                    open={showModal}
-                    onClose={() => setShowModal(false)}
-                    aria-labelledby="modal-title"
-                    aria-describedby="modal-description"
-                >
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            top: '50%',
-                            left: '50%',
-                            transform: 'translate(-50%, -50%)',
-                            bgcolor: 'background.paper',
-                            border: '2px solid #000',
-                            boxShadow: 24,
-                            p: 4,
-                        }}
-                    >
-                        <Typography id="modal-title" variant="h6" component="h2">
-                            Votre avis a bien été envoyé
-                        </Typography>
-                    </Box>
-                </Modal>
+                <Stack spacing={2} sx={{ width: '100%' }}>
+                    <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseNotification}>
+                        <Alert onClose={handleCloseNotification} severity="success" sx={{ width: '100%' }}>
+                            Merci d'avoir donné votre avis!
+                        </Alert>
+                    </Snackbar>
+                </Stack>
             </Box>
             <div>
                 {avis.map((avisItem) => (
                     <div key={recetteId} className="avis-item">
-                        <p>Note: {avisItem.Note}</p>
-                        <p>Description: {avisItem.Description}</p>
+                        <StyledRating
+                            name="highlight-selected-only"
+                            value={avisItem.Note}
+                            IconContainerComponent={IconContainer}
+                            readOnly
+                        />
+                        <p> {avisItem.Description}</p>
                     </div>
                 ))}
             </div>

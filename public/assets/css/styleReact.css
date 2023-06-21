@@ -90,4 +90,20 @@
 }
 
 
+.avis-item {
+    display: flex;
+    padding-left: 2rem;
+    justify-content: center;
+    width: 30%;
+    flex-direction: column;
+    margin-top: 4rem;
+    border-bottom: 1px lightgray solid;
+    padding: 1rem;
+}
+
+.avis-item p {
+    margin-top: 1.5rem;
+}
+
+
 

@@ -144,37 +144,25 @@ class RecetteUserController extends AbstractController
 
 
 
-            $content = json_decode($request->getContent());
-//            dd($content);
-//
-//        if ($content != null) {
-//            $avis = new Avis();
-//            $avis->setAvisRecette($recette);
-//
-//            $avis->setUserAvis($user);
-//            $avis->setNote($content->note);
-//            $avis->setDescription($content->description);
-//            $this->entityManager->persist($avis);
-//            $this->entityManager->flush();
-//        }
-        if ($content != null) {
-            // Créer un nouvel avis
-            $newAvis = new Avis();
-            $newAvis->setAvisRecette($recette);
-            $newAvis->setUserAvis($user);
-            $newAvis->setNote($content->note);
-            $newAvis->setDescription($content->description);
-            $this->entityManager->persist($newAvis);
-            $this->entityManager->flush();
 
-            // Ajouter le nouvel avis à la liste des avis
+            $content = json_decode($request->getContent());
+
+            if ($content != null) {
+                // Créer un nouvel avis
+                $newAvis = new Avis();
+                $newAvis->setAvisRecette($recette);
+                $newAvis->setUserAvis($user);
+                $newAvis->setNote($content->note);
+                $newAvis->setDescription($content->description);
+                $this->entityManager->persist($newAvis);
+                $this->entityManager->flush();
 
         }
 
             return $this->render('recette_user/recette.html.twig', [
                 'recette' => $recette,
                 'AvisUser' => $avisId,
-                'avis' => $avis
+                'avis' => $avis,
             ]);
 
     }

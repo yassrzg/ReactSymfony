@@ -40,30 +40,11 @@ class ApiController extends AbstractController
     public function avis(AvisRepository $avisRepository, SerializerInterface $serializer):JsonResponse
     {
 
-//        $h = fn($r,$f,$c) => [];
-//        $context = [
-//            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => $h
-//        ];
-////        $recettes = $recetteRepository->findRecettesWithRecetteUserFalse();
         $avis = $avisRepository->findAll();
         $jsonAvis = $serializer->serialize($avis, 'json', ['groups' => 'avis']);
         return new JsonResponse($jsonAvis, Response::HTTP_OK, [], true);
 
 
-        $r = $serializer->normalize(
-            [
-                'avis' => $avis
-            ],
-            null,
-            $context
-        );
-        return $this->json(
-            $r,
-            200,
-        );
-
     }
-
-
 
 }
