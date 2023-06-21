@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvisRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AvisRepository::class)]
 class Avis
@@ -14,15 +15,19 @@ class Avis
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['recette','avis'])]
     private ?int $Note = null;
 
     #[ORM\Column(length: 1000)]
+    #[Groups(['recette','avis'])]
     private ?string $Description = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
+    #[Groups(['avis'])]
     private ?User $UserAvis = null;
 
     #[ORM\ManyToOne(inversedBy: 'avis')]
+    #[Groups(['avis'])]
     private ?Recette $AvisRecette = null;
 
     public function getId(): ?int
@@ -77,4 +82,7 @@ class Avis
 
         return $this;
     }
+
+
+
 }

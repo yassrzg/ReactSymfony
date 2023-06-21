@@ -29,7 +29,7 @@ export default function RecetteNoUser() {
     useEffect(() => {
         axios.get('https://127.0.0.1:8000/api/getRecetteNoUser')
             .then(response => {
-                setRecettes(response.data.recettes)
+                setRecettes(response.data)
             })
             .catch(error => {
                 console.error(error);

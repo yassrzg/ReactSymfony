@@ -69,14 +69,17 @@
 
         </div>
 
-    {% if AvisUser is not null %}
-        <div class="container-note">
-            <p class="note-user">Vous avez attribué la note de :</p>
-            <div {{ react_component('RatingRecetteId', { noteUser: AvisUser.Note }) }}></div>
-        </div>
-    {% else %}
-        <div {{ react_component('RatingRecette', { recetteId: recette.id, avis: avis|raw  }) }} class="rating-recette"></div>
-    {% endif %}
+
+{#    {% if AvisUser is not null %}#}
+{#        <div class="container-note">#}
+{#            <p class="note-user">Vous avez attribué la note de :</p>#}
+{#            <div {{ react_component('RatingRecetteId', { noteUser: AvisUser.Note }) }}></div>#}
+{#        </div>#}
+{#    {% else %}#}
+{#        <div {{ react_component('Avis', { recetteId: recette.id, avis: avis|raw|json_encode }) }} class="rating-recette"></div>#}
+        <div {{ react_component('Avis', { recetteId: recette.id, avis: avis }) }} class="rating-recette"></div>
+
+{#    {% endif %}#}
     </div>
 
 

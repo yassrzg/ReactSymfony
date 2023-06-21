@@ -8,6 +8,7 @@ use App\Repository\AvisRepository;
 use App\Repository\RecetteRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,53 +26,29 @@ class ApiController extends AbstractController
 
     }
     #[Route('/api/getRecetteNoUser', name: 'app_api_getRecette_noUser')]
-    public function index(RecetteRepository $recetteRepository, SerializerInterface $serializer):Response
+    public function index(RecetteRepository $recetteRepository, SerializerInterface $serializer):JsonResponse
     {
 
-        $h = fn($r,$f,$c) => [];
-        $context = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => $h
-        ];
         $recettes = $recetteRepository->findRecettesWithRecetteUserFalse();
 
-        $r = $serializer->normalize(
-            [
-                'recettes' => $recettes
-            ],
-            null,
-            $context
-        );
-        return $this->json(
-            $r,
-            200,
-        );
+        $jsonRecettes = $serializer->serialize($recettes, 'json', ['groups' => 'recette']);
+        return new JsonResponse($jsonRecettes, Response::HTTP_OK, [], true);
 
     }
 
-    #[Route('/account/recette_patient/{id}', name: 'app_recette_patient_id')]
-    public function recetteId($id, AvisRepository $avisRepository,  SerializerInterface $serializer) {
+    #[Route('/api/getAvis', name: 'app_api_getAvis')]
+    public function avis(AvisRepository $avisRepository, SerializerInterface $serializer):JsonResponse
+    {
 
-        $recette = $this->entityManager->getRepository(Recette::class)->findOneById($id);
-        if(!$recette) {
-            return $this->redirectToRoute('app_recette_patient');
-        }
+//        $h = fn($r,$f,$c) => [];
+//        $context = [
+//            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => $h
+//        ];
+////        $recettes = $recetteRepository->findRecettesWithRecetteUserFalse();
+        $avis = $avisRepository->findAll();
+        $jsonAvis = $serializer->serialize($avis, 'json', ['groups' => 'avis']);
+        return new JsonResponse($jsonAvis, Response::HTTP_OK, [], true);
 
-
-        $user = $this->getUser();
-        $recetteId = $recette->getId();
-
-        $userId = $user->getId();
-
-        $avisId = $this->entityManager->getRepository(Avis::class)->findByUserIdAndRecetteId($userId, $recetteId);
-
-        $avis = $avisRepository->findBy(['AvisRecette' => $recette]);
-
-
-        $h = fn($r,$f,$c) => [];
-
-        $context = [
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => $h
-        ];
 
         $r = $serializer->normalize(
             [
@@ -86,5 +63,7 @@ class ApiController extends AbstractController
         );
 
     }
+
+
 
 }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: RecetteRepository::class)]
 class Recette
@@ -14,26 +15,33 @@ class Recette
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['recette','avis'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['recette'])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 500)]
+    #[Groups(['recette'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['recette'])]
     private ?\DateTimeInterface $tempsPreparation = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['recette'])]
     private ?\DateTimeInterface $tempsRepos = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['recette'])]
     private ?\DateTimeInterface $tempsCuisson = null;
 
 
 
     #[ORM\ManyToMany(targetEntity: Allergie::class, inversedBy: 'recettes')]
+    #[Groups(['recette'])]
     private Collection $Allergie;
 
 
@@ -42,21 +50,27 @@ class Recette
     private ?bool $recetteUser = null;
 
     #[ORM\ManyToMany(targetEntity: Regime::class, inversedBy: 'recettes')]
+    #[Groups(['recette'])]
     private Collection $Regime;
 
     #[ORM\OneToMany(mappedBy: 'AvisRecette', targetEntity: Avis::class)]
+    #[Groups(['recette'])]
     private Collection $avis;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['recette'])]
     private ?int $NoteMoyenne = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['recette'])]
     private ?string $imageRecette = null;
 
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recettes')]
+    #[Groups(['recette'])]
     private Collection $Ingredient;
 
     #[ORM\ManyToMany(targetEntity: Etapes::class, inversedBy: 'recettes')]
+    #[Groups(['recette'])]
     private Collection $Etape;
 
 
