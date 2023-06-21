@@ -87,7 +87,7 @@ export default function HoverRating({ recetteId }) {
 
     useEffect(() => {
         axios
-            .get('/api/getAvis')
+            .get(`/api/getAvis/${recetteId}`)
             .then((response) => {
                 setAvis(response.data);
                 console.log(avis);
@@ -98,9 +98,9 @@ export default function HoverRating({ recetteId }) {
     }, []);
 
     // JE FILTRE LES AVIS SELON L'ID DE LA RECETTE QUE JE RÉCUPÈRE EN PROPS
-    function getAvisByRecetteId(recetteId) {
-        return avis.filter((avisItem) => avisItem.AvisRecette && avisItem.AvisRecette.id === recetteId);
-    }
+    // function getAvisByRecetteId(recetteId) {
+    //     return avis.filter((avisItem) => avisItem.AvisRecette && avisItem.AvisRecette.id === recetteId);
+    // }
 
     // J'ATTRIBUE UNE NOUVELLE DATA À LA SELECTION DE MES ÉTOILES POUR NOTIFIER L'AVIS
 
@@ -148,7 +148,7 @@ export default function HoverRating({ recetteId }) {
             setOpen(true);
 
             axios
-                .post(`https://127.0.0.1:8000/account/recette_patient/${recetteId}`, {
+                .post(`/account/recette_patient/${recetteId}`, {
                     recetteId: recetteId,
                     note: value,
                     description: comment,
@@ -179,12 +179,12 @@ export default function HoverRating({ recetteId }) {
 
     // LORS DU SUBMIT JE RÉCUPÈRE UNE NOUVELLE FOIS L'ID DE LA RECETTE SELON L'AVIS
 
-    useEffect(() => {
-        const avisByRecette = getAvisByRecetteId(recetteId);
-    }, [avis, recetteId]);
+    function getAvisByRecetteId() {
+        return avis;
+    }
 
 
-    const avisByRecette = getAvisByRecetteId(recetteId);
+    // const avisByRecette = getAvisByRecetteId(recetteId);
 
     return (
         <div>
@@ -244,7 +244,7 @@ export default function HoverRating({ recetteId }) {
             </Box>
             <div>
                 {avis.map((avisItem) => (
-                    <div key={recetteId} className="avis-item">
+                    <div key={avisItem.id} className="avis-item">
                         <StyledRating
                             name="highlight-selected-only"
                             value={avisItem.Note}

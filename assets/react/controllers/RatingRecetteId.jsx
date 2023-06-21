@@ -60,7 +60,7 @@ export default function RatingRecetteId ({ recetteId }) {
 
     useEffect(() => {
         axios
-            .get('/api/getAvis')
+            .get(`/api/getAvis/${recetteId}`)
             .then((response) => {
                 setAvis(response.data);
                 console.log(avis);
@@ -83,7 +83,7 @@ export default function RatingRecetteId ({ recetteId }) {
     return(
         <div>
             {avis.map((avisItem) => (
-                <div key={recetteId} className="avis-item">
+                <div key={avisItem.id} className="avis-item">
                     <StyledRating
                         name="highlight-selected-only"
                         value={avisItem.Note}

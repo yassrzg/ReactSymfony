@@ -7,7 +7,7 @@
 
         <div id="container-Recette">
                 {% for recette in recettes %}
-                        <a href="{{ path('app_recette_patient_id', { 'id': recette.id }) }}" id="link-recette">
+                        <a href="{{ path('app_recette_id', { 'id': recette.id }) }}" id="link-recette">
                                 <div class="containerRecette">
                                         <div class="container-img">
                                                 <img src="/Uploads/{{ recette.imageRecette }}" alt="Recette" class="imgRecette"/>

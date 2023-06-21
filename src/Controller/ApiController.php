@@ -36,15 +36,24 @@ class ApiController extends AbstractController
 
     }
 
-    #[Route('/api/getAvis', name: 'app_api_getAvis')]
-    public function avis(AvisRepository $avisRepository, SerializerInterface $serializer):JsonResponse
-    {
+//    #[Route('/api/getAvis', name: 'app_api_getAvis')]
+//    public function avis(AvisRepository $avisRepository, SerializerInterface $serializer):JsonResponse
+//    {
+//
+//        $avis = $avisRepository->findAll();
+//        $jsonAvis = $serializer->serialize($avis, 'json', ['groups' => 'avis']);
+//        return new JsonResponse($jsonAvis, Response::HTTP_OK, [], true);
+//
+//
+//    }
 
-        $avis = $avisRepository->findAll();
+    #[Route('/api/getAvis/{recetteId}', name: 'app_api_getAvis')]
+    public function avisByRecette(AvisRepository $avisRepository, SerializerInterface $serializer, int $recetteId): JsonResponse
+    {
+        $avis = $avisRepository->findBy(['AvisRecette' => $recetteId]);
         $jsonAvis = $serializer->serialize($avis, 'json', ['groups' => 'avis']);
         return new JsonResponse($jsonAvis, Response::HTTP_OK, [], true);
-
-
     }
+
 
 }

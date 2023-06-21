@@ -25,45 +25,6 @@ class RecetteUserController extends AbstractController
 
     }
 
-//    #[Route('/account/recette_patient', name: 'app_recette_patient')]
-//    public function index(Regime $regime, RegimeRepository $regimeRepository): Response
-//    {
-//        $user = $this->getUser();
-//        $regimes = $user->getRegime();
-//
-//        // Créer un tableau pour stocker les recettes
-//        $recettes = [];
-//
-//        // Récupérer toutes les recettes associées au régime de l'utilisateur
-//        foreach ($regimes as $regime) {
-//            $recettesRegime = $regime->getRecettes();
-//            foreach ($recettesRegime as $recette) {
-//                // Récupérer les avis associés à la recette
-//                $avis = $recette->getAvis();
-//
-//                // Calculer la moyenne des notes
-//                $notes = $avis->map(fn ($avi) => $avi->getNote())->toArray();
-//                $averageRating = count($notes) > 0 ? array_sum($notes) / count($notes) : 0;
-//
-//                // Stocker la moyenne dans la propriété NoteMoyenne de la recette
-//                $recette->setNoteMoyenne($averageRating);
-//
-//                // Ajouter la recette au tableau
-//                $recettes[] = $recette;
-//            }
-//        }
-//
-//
-//        // Enregistrer les modifications dans la base de données
-//        $this->entityManager->flush();
-//
-//        return $this->render('recette_user/index.html.twig', [
-//            'recettes' => $recettes,
-//            'moyenne' => $averageRating
-//        ]);
-//    }
-
-
 
         #[Route('/account/recette_patient', name: 'app_recette_patient')]
     public function index(Regime $regime, RegimeRepository $regimeRepository): Response
