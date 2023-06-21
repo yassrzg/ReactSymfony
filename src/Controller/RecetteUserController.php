@@ -85,46 +85,4 @@ class RecetteUserController extends AbstractController
 
 
 
-    #[Route('/account/recette_patient/{id}', name: 'app_recette_patient_id')]
-    public function recetteId($id, Request $request, AvisRepository $avisRepository) {
-
-            $recette = $this->entityManager->getRepository(Recette::class)->findOneById($id);
-            if(!$recette) {
-                return $this->redirectToRoute('app_recette_patient');
-            }
-
-
-            $user = $this->getUser();
-            $recetteId = $recette->getId();
-
-            $userId = $user->getId();
-
-            $avisId = $this->entityManager->getRepository(Avis::class)->findByUserIdAndRecetteId($userId, $recetteId);
-
-            $avis = $avisRepository->findBy(['AvisRecette' => $recette]);
-
-
-
-
-            $content = json_decode($request->getContent());
-
-            if ($content != null) {
-                // Créer un nouvel avis
-                $newAvis = new Avis();
-                $newAvis->setAvisRecette($recette);
-                $newAvis->setUserAvis($user);
-                $newAvis->setNote($content->note);
-                $newAvis->setDescription($content->description);
-                $this->entityManager->persist($newAvis);
-                $this->entityManager->flush();
-
-        }
-
-            return $this->render('recette_user/recette.html.twig', [
-                'recette' => $recette,
-                'AvisUser' => $avisId,
-                'avis' => $avis,
-            ]);
-
-    }
 }

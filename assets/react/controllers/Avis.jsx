@@ -4,7 +4,6 @@ import Box from '@mui/material/Box';
 import StarIcon from '@mui/icons-material/Star';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 
@@ -148,7 +147,7 @@ export default function HoverRating({ recetteId }) {
             setOpen(true);
 
             axios
-                .post(`/account/recette_patient/${recetteId}`, {
+                .post(`/recette/${recetteId}`, {
                     recetteId: recetteId,
                     note: value,
                     description: comment,

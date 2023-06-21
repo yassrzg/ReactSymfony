@@ -24,7 +24,13 @@ class RecetteController extends AbstractController
     #[Route('/recette', name: 'app_recette')]
     public function index(RecetteRepository $recetteRepository ): Response
     {
-        $recette = $recetteRepository->findRecettesWithRecetteUserFalse();
+
+        $user = $this->getUser();
+        if($user){
+            $recette = $recetteRepository->findAll();
+        }else {
+            $recette = $recetteRepository->findRecettesWithRecetteUserFalse();
+        }
 
         $recettes = [];
 

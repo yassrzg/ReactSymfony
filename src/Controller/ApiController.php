@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Avis;
+use App\Entity\Contact;
 use App\Entity\Recette;
 use App\Repository\AvisRepository;
 use App\Repository\RecetteRepository;
@@ -36,16 +37,6 @@ class ApiController extends AbstractController
 
     }
 
-//    #[Route('/api/getAvis', name: 'app_api_getAvis')]
-//    public function avis(AvisRepository $avisRepository, SerializerInterface $serializer):JsonResponse
-//    {
-//
-//        $avis = $avisRepository->findAll();
-//        $jsonAvis = $serializer->serialize($avis, 'json', ['groups' => 'avis']);
-//        return new JsonResponse($jsonAvis, Response::HTTP_OK, [], true);
-//
-//
-//    }
 
     #[Route('/api/getAvis/{recetteId}', name: 'app_api_getAvis')]
     public function avisByRecette(AvisRepository $avisRepository, SerializerInterface $serializer, int $recetteId): JsonResponse
@@ -53,6 +44,26 @@ class ApiController extends AbstractController
         $avis = $avisRepository->findBy(['AvisRecette' => $recetteId]);
         $jsonAvis = $serializer->serialize($avis, 'json', ['groups' => 'avis']);
         return new JsonResponse($jsonAvis, Response::HTTP_OK, [], true);
+    }
+
+    #[Route('/api/setContact', name: 'app_api_setContact')]
+    public function contact(Request $request): JsonResponse
+    {
+
+        $content = json_decode($request->getContent());
+        if($content != null) {
+
+        $newContact = new Contact();
+        $newContact->setEmail($content->email);
+        $newContact->setName($content->name);
+        $newContact->setObjet($content->objet);
+        $newContact->setDescription($content->description);
+
+        $this->entityManager->persist($newContact);
+        $this->entityManager->flush();
+            return new JsonResponse(['message' => 'Opération réussie'], 200);
+        }
+        return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
     }
 
 
