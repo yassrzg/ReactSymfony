@@ -51,16 +51,26 @@ class RecetteController extends AbstractController
         ]);
     }
 
-    #[Route('/recette/{id}', name: 'app_recette_id')]
-    public function recetteId($id, Request $request, AvisRepository $avisRepository) {
 
-        $recette = $this->entityManager->getRepository(Recette::class)->findOneById($id);
-        if(!$recette) {
-            return $this->redirectToRoute('app_recette_patient');
+    #[Route('/recette/{id}', name: 'app_recette_id')]
+    public function recetteId($id, Request $request, AvisRepository $avisRepository, RecetteRepository $recetteRepository) {
+
+        $user = $this->getUser();
+        if($user){
+
+            $recette = $this->entityManager->getRepository(Recette::class)->findOneById($id);
+            if(!$recette) {
+                return $this->redirectToRoute('app_recette_patient');
+            }
+        }else{
+            $recette = $recetteRepository->findOneBy(['id' => $id, 'recetteUser' => false]);
+            if (!$recette) {
+                return $this->redirectToRoute('app_recette');
+            }
         }
 
+
         $avisId = null;
-        $user = $this->getUser();
         $recetteId = $recette->getId();
         if($user) {
 

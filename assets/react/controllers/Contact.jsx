@@ -8,8 +8,10 @@ import Typography from "@mui/material/Typography";
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import imgContact from '../../../public/Image/dieteContact.jpg'
 import '../../../public/assets/css/styleReact.css';
+
+
 
 
 
@@ -119,13 +121,15 @@ export default function Contact() {
                 email: email,
                 name: name,
                 objet: objet,
-                description: description
+                description: description,
+                number: phone
             }).then(response => {
                 // Réinitialiser les valeurs des champs
                 setEmail('');
                 setName('');
                 setObjet('');
                 setDescription('');
+                setPhone('');
             }).catch(error => {
                 // Gérer les erreurs
                 console.error(error);
@@ -134,121 +138,108 @@ export default function Contact() {
 
 
         }
+
     }
+
+
     return(
-        <div id="contact">
-            {!formSubmitted && (
-                <form>
-                    <div className="information-contact">
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                '& > :not(style)': { m: 1 },
-                            }}
-                        >
-                            <TextField
-                                helperText="Please enter your email"
-                                id="email-input"
-                                label="E-mail"
-                                value={email}
-                                onChange={handleEmailChange}
-                                error={Boolean(emailError)}
-                                pattern="^\S+@\S+\.\S+$"
-                            />
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                '& > :not(style)': { m: 1 },
-                            }}
-                        >
-                            <TextField
-                                helperText="Please enter your name"
-                                id="name-input"
-                                label="Name"
-                                value={name}
-                                onChange={handleNameChange}
-                                error={Boolean(nameError)}
-                                inputProps={{
-                                    pattern: nameRegex.source,
-                                }}
-                            />
-
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                '& > :not(style)': { m: 1 },
-                            }}
-                        >
-                            <TextField
-                                helperText="Please enter your number phone"
-                                id="phone-input"
-                                label="Phone Number"
-                                value={phone}
-                                onChange={handlePhoneChange}
-                                error={Boolean(phoneError)}
-                                pattern="^\d{10}$"
-                            />
-                        </Box>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                '& > :not(style)': { m: 1 },
-                            }}
-                        >
-                            <TextField
-                                helperText="Please enter the subject"
-                                id="objet-input"
-                                label="Objet"
-                                value={objet}
-                                onChange={handleObjetChange}
-                            />
-                        </Box>
-                        {objetError && (
-                            <Typography variant="caption" color="error">
-                                {objetError}
-                            </Typography>
-                        )}
-                    </div>
-                    <div>
-                        <Box sx={{ mt: 2, width: '100%' }}>
-                            <TextField
-                                label="Description"
-                                variant="outlined"
-                                multiline
-                                rows={4}
-                                value={description}
-                                onChange={handleDescriptionChange}
-                                fullWidth
-                            />
-                        </Box>
-                        {descriptionError && (
-                            <Typography variant="caption" color="error">
-                                {descriptionError}
-                            </Typography>
-                        )}
-                    </div>
-                    <Box sx={{ mt: 2 }}>
-                        <Button variant="contained" onClick={handleSubmit}>
-                            Envoyez mon message
-                        </Button>
-                    </Box>
-                </form>
-            )}
-            <Stack spacing={2} sx={{ width: '100%' }}>
-                <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseNotification}>
-                    <Alert onClose={handleCloseNotification} severity="success" sx={{ width: '100%' }}>
-                        Message envoyé!
-                    </Alert>
-                </Snackbar>
-            </Stack>
-
-
+        <div id="contact-react">
+            <div id="title-contact">
+                <h2>Contactez-moi</h2>
+            </div>
+            <div id="contact-container">
+                <div id="imgContact">
+                    <img src={imgContact} alt="contact-img" />
+                </div>
+                <div id="contact">
+                    {!formSubmitted && (
+                        <form id="form-contact">
+                            <div className="container-contact">
+                                <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
+                                    <TextField
+                                        helperText="Please enter your email"
+                                        id="email-input"
+                                        label="E-mail"
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                        error={Boolean(emailError)}
+                                        pattern="^\S+@\S+\.\S+$"
+                                        fullWidth
+                                    />
+                                </Box>
+                                <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
+                                    <TextField
+                                        helperText="Please enter your name"
+                                        id="name-input"
+                                        label="Name"
+                                        value={name}
+                                        onChange={handleNameChange}
+                                        error={Boolean(nameError)}
+                                        inputProps={{ pattern: nameRegex.source }}
+                                        fullWidth
+                                    />
+                                </Box>
+                                <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
+                                    <TextField
+                                        helperText="Please enter your number phone"
+                                        id="phone-input"
+                                        label="Phone Number"
+                                        value={phone}
+                                        onChange={handlePhoneChange}
+                                        error={Boolean(phoneError)}
+                                        pattern="^\d{10}$"
+                                        fullWidth
+                                    />
+                                </Box>
+                                <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
+                                    <TextField
+                                        helperText="Please enter the subject"
+                                        id="objet-input"
+                                        label="Objet"
+                                        value={objet}
+                                        onChange={handleObjetChange}
+                                        fullWidth
+                                    />
+                                </Box>
+                                {objetError && (
+                                    <Typography variant="caption" color="error">
+                                        {objetError}
+                                    </Typography>
+                                )}
+                                <Box sx={{ mt: 2, width: '80%' }} className="description-contact">
+                                    <TextField
+                                        label="Description"
+                                        variant="outlined"
+                                        multiline
+                                        rows={4}
+                                        value={description}
+                                        onChange={handleDescriptionChange}
+                                        fullWidth
+                                    />
+                                </Box>
+                                {descriptionError && (
+                                    <Typography variant="caption" color="error">
+                                        {descriptionError}
+                                    </Typography>
+                                )}
+                                <Box sx={{ mt: 2, width: '80%' }}>
+                                    <Button variant="contained" onClick={handleSubmit} id="submit-button">
+                                        Envoyez mon message
+                                    </Button>
+                                </Box>
+                            </div>
+                        </form>
+                    )}
+                    <Stack spacing={2} sx={{ width: '100%' }}>
+                        <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseNotification}>
+                            <Alert onClose={handleCloseNotification} severity="success" sx={{ width: '100%' }}>
+                                Message envoyé!
+                            </Alert>
+                        </Snackbar>
+                    </Stack>
+                </div>
+            </div>
         </div>
+
     );
 }

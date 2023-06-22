@@ -25,6 +25,9 @@ class Contact
     #[ORM\Column(length: 2000)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $phoneNumber = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Contact
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

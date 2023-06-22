@@ -58,6 +58,7 @@ class ApiController extends AbstractController
         $newContact->setName($content->name);
         $newContact->setObjet($content->objet);
         $newContact->setDescription($content->description);
+        $newContact->setPhoneNumber($content->number);
 
         $this->entityManager->persist($newContact);
         $this->entityManager->flush();
