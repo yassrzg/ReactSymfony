@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import Typewriter from 'typewriter-effect';
 
 function TypewriterEffect() {
     const [text, setText] = useState('');
     const sentences = [
-        '<h2><strong style="color: #27ae60;"> Transforme-toi, deviens meilleur !</strong> </h2>!',
-        '<h2><strong style="color: #27ae60;"> Régime adopté! Changement garanti !</strong> </h2>!',
-        '<h2><strong style="color: #27ae60;"> Votre corps, votre transformation !</strong> </h2>!',
-        '<h2><strong style="color: #27ae60;"> Découvrez votre potentiel, transformez-vous !</strong> </h2>!',
+        'Transforme-toi, Deviens meilleur !',
+        'Régime adopté ! Changement garanti !',
+        'Votre corps, Votre transformation !',
+        'Découvrez votre potentiel, Transformez-vous !',
     ];
 
     useEffect(() => {
@@ -20,7 +19,8 @@ function TypewriterEffect() {
             }
 
             if (charIndex < sentences[sentenceIndex].length) {
-                setText((prevText) => prevText + sentences[sentenceIndex].charAt(charIndex));
+                const nextChar = sentences[sentenceIndex].substring(charIndex, charIndex + 1);
+                setText((prevText) => prevText + nextChar);
                 charIndex++;
                 setTimeout(type, 50);
             } else {
@@ -46,7 +46,7 @@ function TypewriterEffect() {
         };
     }, []);
 
-    return <div className="description" dangerouslySetInnerHTML={{ __html: text }} />;
+    return (<h2 className="description" dangerouslySetInnerHTML={{ __html: text }}></h2>);
 }
 
 export default TypewriterEffect;
