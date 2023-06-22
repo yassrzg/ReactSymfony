@@ -5,9 +5,18 @@ import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import axios from "axios";
 import Typography from "@mui/material/Typography";
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 
 
+// ALERT
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function Contact() {
 
     const [description, setDescription] = useState('');
@@ -39,6 +48,15 @@ export default function Contact() {
         setObjet(event.target.value);
         setObjetError('');
     }
+
+    const handleCloseNotification = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+
+    };
 
     function  handleSubmit (e){
         e.preventDefault();
@@ -108,21 +126,34 @@ export default function Contact() {
                             {emailError}
                         </Typography>
                     )}
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            '& > :not(style)': { m: 1 },
-                        }}
-                    >
-                        <TextField
-                            helperText="Please enter your name"
-                            id="name-input"
-                            label="Name"
-                            value={name}
-                            onChange={handleNameChange}
-                        />
+                    <Box sx={{ '& > :not(style)': { m: 1 } }}>
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+                            <TextField
+                                helperText="Please enter your name"
+                                id="name-input"
+                                label="Name"
+                                variant="standard"
+                                value={name}
+                                onChange={handleNameChange}
+                            />
+                        </Box>
                     </Box>
+                    {/*<Box*/}
+                    {/*    sx={{*/}
+                    {/*        display: 'flex',*/}
+                    {/*        alignItems: 'center',*/}
+                    {/*        '& > :not(style)': { m: 1 },*/}
+                    {/*    }}*/}
+                    {/*>*/}
+                    {/*    <TextField*/}
+                    {/*        helperText="Please enter your name"*/}
+                    {/*        id="name-input"*/}
+                    {/*        label="Name"*/}
+                    {/*        value={name}*/}
+                    {/*        onChange={handleNameChange}*/}
+                    {/*    />*/}
+                    {/*</Box>*/}
                     {nameError && (
                         <Typography variant="caption" color="error">
                             {nameError}
@@ -171,6 +202,13 @@ export default function Contact() {
                     </Box>
                 </form>
             )}
+            <Stack spacing={2} sx={{ width: '100%' }}>
+                <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseNotification}>
+                    <Alert onClose={handleCloseNotification} severity="success" sx={{ width: '100%' }}>
+                        Message envoyé!
+                    </Alert>
+                </Snackbar>
+            </Stack>
 
 
         </div>
