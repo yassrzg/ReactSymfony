@@ -66,6 +66,11 @@ body {
 
 /* HOME PAGE */
 
+#typewriter {
+    height: 5rem;
+    width: 100%;
+}
+
 #logo {
     height: 15rem;
     width: 100%;

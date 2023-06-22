@@ -17,6 +17,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+
 export default function Contact() {
 
     const [description, setDescription] = useState('');
@@ -27,17 +29,37 @@ export default function Contact() {
     const [nameError, setNameError] = useState('');
     const [objet, setObjet] = useState('');
     const [objetError, setObjetError] = useState('');
+    const [phone, setPhone] = useState('');
+    const [phoneError, setPhoneError] = useState('');
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [open, setOpen] = useState(false);
 
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    const phoneRegex = /^\d{10}$/;
+
+
+    function handlePhoneChange(event) {
+        const phoneValue = event.target.value;
+        setPhone(phoneValue);
+        if (!phoneRegex.test(phoneValue)) {
+            setPhoneError('Veuillez entrer un numéro de téléphone valide (10 chiffres).');
+        } else {
+            setPhoneError('');
+        }
+    }
     function handleDescriptionChange(event) {
         setDescription(event.target.value);
         setDescriptionError('');
     }
     function handleEmailChange(event) {
-        setEmail(event.target.value);
-        setEmailError('');
+        const emailValue = event.target.value;
+        setEmail(emailValue);
+        if (!emailRegex.test(emailValue)) {
+            setEmailError('Veuillez entrer une adresse e-mail valide.');
+        } else {
+            setEmailError('');
+        }
     }
 
     function handleNameChange(event) {
@@ -67,6 +89,9 @@ export default function Contact() {
         if (!name) {
             setNameError('Entrez votre prénom.');
             return;
+        }
+        if(!phone) {
+            setPhoneError('Entrez votre numéro de tel')
         }
         if (!objet) {
             setObjetError('Entrez un objet de contact.');
@@ -116,16 +141,13 @@ export default function Contact() {
                         <TextField
                             helperText="Please enter your email"
                             id="email-input"
-                            label="Email"
+                            label="E-mail"
                             value={email}
                             onChange={handleEmailChange}
+                            error={Boolean(emailError)}
+                            pattern="^\S+@\S+\.\S+$"
                         />
                     </Box>
-                    {emailError && (
-                        <Typography variant="caption" color="error">
-                            {emailError}
-                        </Typography>
-                    )}
                     <Box sx={{ '& > :not(style)': { m: 1 } }}>
                         <Box sx={{ display: 'flex', alignItems: 'center' }}>
                             <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
@@ -139,26 +161,28 @@ export default function Contact() {
                             />
                         </Box>
                     </Box>
-                    {/*<Box*/}
-                    {/*    sx={{*/}
-                    {/*        display: 'flex',*/}
-                    {/*        alignItems: 'center',*/}
-                    {/*        '& > :not(style)': { m: 1 },*/}
-                    {/*    }}*/}
-                    {/*>*/}
-                    {/*    <TextField*/}
-                    {/*        helperText="Please enter your name"*/}
-                    {/*        id="name-input"*/}
-                    {/*        label="Name"*/}
-                    {/*        value={name}*/}
-                    {/*        onChange={handleNameChange}*/}
-                    {/*    />*/}
-                    {/*</Box>*/}
                     {nameError && (
                         <Typography variant="caption" color="error">
                             {nameError}
                         </Typography>
                     )}
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            '& > :not(style)': { m: 1 },
+                        }}
+                    >
+                        <TextField
+                            helperText="Please enter your number phone"
+                            id="phone-input"
+                            label="Phone Number"
+                            value={phone}
+                            onChange={handlePhoneChange}
+                            error={Boolean(phoneError)}
+                            pattern="^\d{10}$"
+                        />
+                    </Box>
                     <Box
                         sx={{
                             display: 'flex',
