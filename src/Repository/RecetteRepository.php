@@ -134,6 +134,17 @@ class RecetteRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findByRegimesNames(array $regimesNames): array
+    {
+        return $this->createQueryBuilder('r')
+            ->join('r.Regime', 'Regime')
+            ->andWhere('Regime.name IN (:regimesNames)')
+            ->setParameter('regimesNames', $regimesNames)
+            ->getQuery()
+            ->getResult();
+    }
+
+
 
 
 

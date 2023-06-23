@@ -246,7 +246,7 @@ export default function Contact() {
                                     <TextField
                                         helperText="Please enter your name"
                                         id="name-input"
-                                        label="Name"
+                                        label="Prénom"
                                         value={name}
                                         onChange={handleNameChange}
                                         error={Boolean(nameError)}
@@ -258,7 +258,7 @@ export default function Contact() {
                                     <TextField
                                         helperText="Please enter your surname"
                                         id="surname-input"
-                                        label="Surname"
+                                        label="Nom"
                                         value={surname}
                                         onChange={handleSurnameChange}
                                         error={Boolean(surnameError)}
@@ -270,7 +270,7 @@ export default function Contact() {
                                     <TextField
                                         helperText="Please enter your number phone"
                                         id="phone-input"
-                                        label="Phone Number"
+                                        label="Téléphone"
                                         value={phone}
                                         onChange={handlePhoneChange}
                                         error={Boolean(phoneError)}
@@ -308,6 +308,7 @@ export default function Contact() {
                                         {value.length >= 3 && value.length < 6 && 'Weak'}
                                         {value.length >= 6 && value.length < 10 && 'Strong'}
                                         {value.length >= 10 && 'Very strong'}
+                                        {!/^[a-zA-Z0-9]*$/.test(value) && ' - Must contain special characters'}
                                     </Typography>
                                 </Stack>
                                 <div id="react-allergie-regime">

@@ -105,6 +105,8 @@ class ApiController extends AbstractController
                 $regimeString = implode(',', $content->regime); // convert array to string
                 $allergieString = implode(',', $content->allergie);
 
+                $newUser->setRegime($regimeString);
+
                 $newUser->setRegimeUser($regimeString);
                 $newUser->setAllergieUser($allergieString);
 

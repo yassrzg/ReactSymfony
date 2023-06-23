@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Recette;
 use App\Entity\Regime;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,9 +19,12 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RegimeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+
+    private EntityManagerInterface $entityManager;
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Regime::class);
+        $this->entityManager = $entityManager;
     }
 
     public function save(Regime $entity, bool $flush = false): void
@@ -39,6 +44,43 @@ class RegimeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllWithNames(): array
+    {
+        $query = $this->entityManager->createQueryBuilder();
+        $query->select('u')
+            ->from(Regime::class, 'u');
+        $qb = $query->getQuery();
+        return $qb->getResult();
+    }
+
+    public function findRecettesByRegimes(array $regimes): array
+    {
+        return $this->createQueryBuilder('r')
+            ->leftJoin('r.recettes', 'recettes')
+            ->andWhere('r.name IN (:regimes)')
+            ->setParameter('regimes', $regimes)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByRegimesNames(array $regimesNames): array
+    {
+        return $this->createQueryBuilder('r')
+            ->join('r.regimes', 'regime')
+            ->andWhere('regime.name IN (:regimesNames)')
+            ->setParameter('regimesNames', $regimesNames)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
+
+
+
+
 
 
 

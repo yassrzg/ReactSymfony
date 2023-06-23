@@ -26,19 +26,83 @@ class RecetteUserController extends AbstractController
     }
 
 
-        #[Route('/account/recette_patient', name: 'app_recette_patient')]
+//        #[Route('/account/recette_patient', name: 'app_recette_patient')]
+//    public function index(Regime $regime, RegimeRepository $regimeRepository): Response
+//    {
+//        $user = $this->getUser();
+//        $regimes = $user->getRegime();
+//
+//
+//        // Créer un tableau pour stocker les recettes
+//        $recettes = [];
+//
+//        // Récupérer toutes les recettes associées au régime de l'utilisateur
+//        foreach ($regimes as $regime) {
+//            $recettesRegime = $regime->getRecettes();
+//            foreach ($recettesRegime as $recette) {
+//                // Récupérer les avis associés à la recette
+//                $avis = $recette->getAvis();
+//
+//                // Calculer la moyenne des notes
+//                $notes = $avis->map(fn ($avi) => $avi->getNote())->toArray();
+//                $averageRating = count($notes) > 0 ? array_sum($notes) / count($notes) : 0;
+//
+//
+//                // Stocker la moyenne dans la propriété NoteMoyenne de la recette
+//                $recette->setNoteMoyenne($averageRating);
+//
+//                // Ajouter la recette au tableau
+//                $recettes[] = $recette;
+//            }
+//        }
+//
+//        $userAllergies = explode(',', $user->getAllergieUser());
+//        $filteredRecettes = [];
+//        foreach ($recettes as $recette) {
+//            $recetteAllergies =  $recette->getAllergie()->toArray();
+//
+//
+//            // Vérifier si les allergies de l'utilisateur sont présentes dans les allergies de la recette
+//            $hasAllergies = false;
+//            foreach ($userAllergies as $allergie) {
+//                if (in_array($allergie, $recetteAllergies)) {
+//                    $hasAllergies = true;
+//                    break;
+//                }
+//            }
+//
+//            // Ajouter la recette à la liste des recettes filtrées si elle ne mentionne pas les allergies de l'utilisateur
+//            if (!$hasAllergies) {
+//                $filteredRecettes[] = $recette;
+//            }
+//        }
+//        dd($filteredRecettes);
+//
+//
+//        // Enregistrer les modifications dans la base de données
+//        $this->entityManager->flush();
+//
+//        return $this->render('recette_user/index.html.twig', [
+//            'recettes' => $filteredRecettes,
+////            'moyenne' => $averageRating
+//        ]);
+//    }
+
+    #[Route('/account/recette_patient', name: 'app_recette_patient')]
     public function index(Regime $regime, RegimeRepository $regimeRepository): Response
     {
         $user = $this->getUser();
-        $regimes = $user->getRegime();
+        $regimeUser = $user->getRegimeUser();
+        $regimesName = explode(',', $regimeUser);
 
-        // Créer un tableau pour stocker les recettes
-        $recettes = [];
 
+
+        $recettesArray = $this->entityManager->getRepository(Recette::class)->findByRegimesNames($regimesName);
+
+            $recettes=[];
         // Récupérer toutes les recettes associées au régime de l'utilisateur
-        foreach ($regimes as $regime) {
-            $recettesRegime = $regime->getRecettes();
-            foreach ($recettesRegime as $recette) {
+
+            foreach ($recettesArray as $recette) {
                 // Récupérer les avis associés à la recette
                 $avis = $recette->getAvis();
 
@@ -46,13 +110,18 @@ class RecetteUserController extends AbstractController
                 $notes = $avis->map(fn ($avi) => $avi->getNote())->toArray();
                 $averageRating = count($notes) > 0 ? array_sum($notes) / count($notes) : 0;
 
+
                 // Stocker la moyenne dans la propriété NoteMoyenne de la recette
                 $recette->setNoteMoyenne($averageRating);
 
                 // Ajouter la recette au tableau
                 $recettes[] = $recette;
             }
-        }
+
+
+
+
+
         $userAllergies = explode(',', $user->getAllergieUser());
         $filteredRecettes = [];
         foreach ($recettes as $recette) {
@@ -74,12 +143,14 @@ class RecetteUserController extends AbstractController
             }
         }
 
+
+
         // Enregistrer les modifications dans la base de données
         $this->entityManager->flush();
 
         return $this->render('recette_user/index.html.twig', [
             'recettes' => $filteredRecettes,
-            'moyenne' => $averageRating
+//            'moyenne' => $averageRating
         ]);
     }
 
