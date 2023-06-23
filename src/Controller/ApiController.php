@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -26,9 +27,11 @@ class ApiController extends AbstractController
 
 
     private EntityManagerInterface $entityManager;
+    private SerializerInterface $serializer;
 
-    public function __construct(EntityManagerInterface $entityManager) {
+    public function __construct(EntityManagerInterface $entityManager, SerializerInterface $serializer, Security $security) {
         $this->entityManager = $entityManager;
+        $this->serializer = $serializer;
 
     }
     #[Route('/api/getRecetteNoUser', name: 'app_api_getRecette_noUser')]
@@ -117,12 +120,15 @@ class ApiController extends AbstractController
         return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
     }
 
+
+
     #[Route('/api/getUser', name: 'app_api_getUser')]
-    public function getUser(SerializerInterface $serializer): JsonResponse
+    public function getUserData(): JsonResponse
     {
         $user = $this->getUser();
-        $jsonRegime = $serializer->serialize($user, 'json', ['groups' => 'user']);
-        return new JsonResponse($jsonRegime, Response::HTTP_OK, [], true);
+        $jsonUser = $this->serializer->serialize($user, 'json', ['groups' => 'user']);
+
+        return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
     }
 
 

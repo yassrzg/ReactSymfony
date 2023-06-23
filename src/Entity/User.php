@@ -19,6 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['user'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -28,20 +29,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column(type: "string")]
+    #[Groups(['user'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['avis'])]
+    #[Groups(['avis', 'user'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['avis'])]
+    #[Groups(['avis', 'user'])]
     private ?string $lastname = null;
 
     #[ORM\ManyToMany(targetEntity: Regime::class, inversedBy: 'users')]
     private Collection $Regime;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user'])]
     private ?string $RegimeUser = null;
 
     #[ORM\OneToMany(mappedBy: 'UserAvis', targetEntity: Avis::class)]
@@ -51,9 +54,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $Allergie;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user'])]
     private ?string $AllergieUser = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user'])]
     private ?string $phoneNumber = null;
 
 
