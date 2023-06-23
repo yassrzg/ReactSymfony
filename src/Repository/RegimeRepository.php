@@ -45,34 +45,7 @@ class RegimeRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllWithNames(): array
-    {
-        $query = $this->entityManager->createQueryBuilder();
-        $query->select('u')
-            ->from(Regime::class, 'u');
-        $qb = $query->getQuery();
-        return $qb->getResult();
-    }
 
-    public function findRecettesByRegimes(array $regimes): array
-    {
-        return $this->createQueryBuilder('r')
-            ->leftJoin('r.recettes', 'recettes')
-            ->andWhere('r.name IN (:regimes)')
-            ->setParameter('regimes', $regimes)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findByRegimesNames(array $regimesNames): array
-    {
-        return $this->createQueryBuilder('r')
-            ->join('r.regimes', 'regime')
-            ->andWhere('regime.name IN (:regimesNames)')
-            ->setParameter('regimesNames', $regimesNames)
-            ->getQuery()
-            ->getResult();
-    }
 
 
 

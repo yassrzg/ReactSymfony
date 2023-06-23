@@ -10,6 +10,7 @@ use App\Repository\AllergieRepository;
 use App\Repository\AvisRepository;
 use App\Repository\RecetteRepository;
 use App\Repository\RegimeRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -105,8 +106,6 @@ class ApiController extends AbstractController
                 $regimeString = implode(',', $content->regime); // convert array to string
                 $allergieString = implode(',', $content->allergie);
 
-                $newUser->setRegime($regimeString);
-
                 $newUser->setRegimeUser($regimeString);
                 $newUser->setAllergieUser($allergieString);
 
@@ -116,6 +115,14 @@ class ApiController extends AbstractController
             }
         }
         return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
+    }
+
+    #[Route('/api/getUser', name: 'app_api_getUser')]
+    public function getUser(SerializerInterface $serializer): JsonResponse
+    {
+        $user = $this->getUser();
+        $jsonRegime = $serializer->serialize($user, 'json', ['groups' => 'user']);
+        return new JsonResponse($jsonRegime, Response::HTTP_OK, [], true);
     }
 
 

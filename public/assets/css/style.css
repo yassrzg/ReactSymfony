@@ -924,6 +924,7 @@ footer li {
 
 @media (max-width: 767px) {
 
+
     #container-Recette {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
@@ -952,7 +953,7 @@ footer li {
     }
 
     nav {
-        height: 100%;
+        height: auto;
         padding: 0 !important;
     }
 
