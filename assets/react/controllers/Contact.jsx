@@ -156,6 +156,7 @@ export default function Contact() {
                         <form id="form-contact">
                             <div className="container-contact">
                                 <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
+
                                     <TextField
                                         helperText="Please enter your email"
                                         id="email-input"
@@ -206,7 +207,7 @@ export default function Contact() {
                                         {objetError}
                                     </Typography>
                                 )}
-                                <Box sx={{ mt: 2, width: '80%' }} className="description-contact">
+                                <Box sx={{ '& > :not(style)': { m: 1 }, width: '80%' }} className="description-contact">
                                     <TextField
                                         label="Description"
                                         variant="outlined"
@@ -222,7 +223,7 @@ export default function Contact() {
                                         {descriptionError}
                                     </Typography>
                                 )}
-                                <Box sx={{ mt: 2, width: '80%' }}>
+                                <Box sx={{ '& > :not(style)': { m: 1 }, width: '80%'}} id="button">
                                     <Button variant="contained" onClick={handleSubmit} id="submit-button">
                                         Envoyez mon message
                                     </Button>

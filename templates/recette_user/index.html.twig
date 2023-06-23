@@ -4,7 +4,11 @@
 
 {% block body %}
 
-
+        <div id="titleRecette" class="reveal-1">
+                <h2 class="reveal-1">Nos Recettes</h2>
+                <p class="reveal-2">Bienvenue dans notre collection de recettes spécialement conçues pour répondre aux besoins des régimes spéciaux et des personnes ayant des allergies alimentaires. En tant que diététicien-nutritionniste expérimenté, j'ai créé cette sélection avec soin pour vous offrir des options culinaires savoureuses et adaptées à votre situation.</p>
+                <p class="reveal-3">Chacune de nos recettes est élaborée en tenant compte des restrictions alimentaires et des allergènes couramment rencontrés. Nous prenons des mesures pour minimiser les risques de contamination croisée et nous fournissons des informations détaillées sur les ingrédients utilisés, afin que vous puissiez prendre des décisions éclairées en matière de nutrition.</p>
+        </div>
         <div id="container-Recette">
                 {% for recette in recettes %}
                         <a href="{{ path('app_recette_id', { 'id': recette.id }) }}" id="link-recette">
@@ -26,14 +30,16 @@
                                                                 <p>{{ recette.tempsCuisson|date('H:i') }} heure</p>
                                                         </div>
                                                 </div>
-                                                <div class="allergie">
-                                                        <img src="{{ asset('Image/icons-attention.png') }}" alt="attention">
-                                                        <p>ALLERGIE</p>
-                                                </div>
-                                                <div class="container-allergie">
-                                                        {% for allergie in recette.Allergie %}
-                                                                <p>{{ allergie.name }}</p>
-                                                        {% endfor %}
+                                                <div id="allergieRecette">
+                                                        <div class="allergie">
+                                                                <img src="{{ asset('Image/icons-attention.png') }}" alt="attention">
+                                                                <p>ALLERGIE</p>
+                                                        </div>
+                                                        <div class="container-allergie">
+                                                                {% for allergie in recette.Allergie %}
+                                                                        <p>{{ allergie.name }}</p>
+                                                                {% endfor %}
+                                                        </div>
                                                 </div>
                                         </div>
                                         <div>

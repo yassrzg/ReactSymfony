@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $AllergieUser = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $phoneNumber = null;
+
 
 
     public function __construct()
@@ -258,6 +261,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAllergieUser(?string $AllergieUser): static
     {
         $this->AllergieUser = $AllergieUser;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

@@ -242,6 +242,9 @@ export default function HoverRating({ recetteId }) {
                 </Stack>
             </Box>
             <div>
+                <div className="titleAvis">
+                    <h4>Tous vos avis:</h4>
+                </div>
                 {avis.map((avisItem) => (
                     <div key={avisItem.id} className="avis-item">
                         <StyledRating

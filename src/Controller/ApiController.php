@@ -5,13 +5,17 @@ namespace App\Controller;
 use App\Entity\Avis;
 use App\Entity\Contact;
 use App\Entity\Recette;
+use App\Entity\User;
+use App\Repository\AllergieRepository;
 use App\Repository\AvisRepository;
 use App\Repository\RecetteRepository;
+use App\Repository\RegimeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -66,6 +70,52 @@ class ApiController extends AbstractController
         }
         return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
     }
+
+    #[Route('/api/getAllergie', name: 'app_api_getAllergie')]
+    public function allergie(AllergieRepository $allergieRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $allergie = $allergieRepository->findAll();
+        $jsonAllergie = $serializer->serialize($allergie, 'json', ['groups' => 'allergie']);
+        return new JsonResponse($jsonAllergie, Response::HTTP_OK, [], true);
+    }
+    #[Route('/api/getRegime', name: 'app_api_getRegime')]
+    public function regime(RegimeRepository $regimeRepository, SerializerInterface $serializer): JsonResponse
+    {
+        $regime = $regimeRepository->findAll();
+        $jsonRegime = $serializer->serialize($regime, 'json', ['groups' => 'allergie']);
+        return new JsonResponse($jsonRegime, Response::HTTP_OK, [], true);
+    }
+
+    #[Route('/api/setUser', name: 'app_api_setUser')]
+    public function user(Request $request ,UserPasswordHasherInterface $hashPassword): JsonResponse
+    {
+        $content = json_decode($request->getContent());
+        $newUser = new User();
+        if($content != null) {
+            $userExist = $this->entityManager->getRepository(User::class)->findOneBy(['email' =>$newUser->getEmail()]);
+            if(!$userExist) {
+                $newUser->setEmail($content->email);
+                $newUser->setRoles(['ROLE_USER']);
+                $newUser->setFirstname($content->name);
+                $newUser->setLastname($content->surname);
+                $password = $hashPassword->hashPassword($newUser,$content->password);
+                $newUser->setPassword($password);
+                $newUser->setPhoneNumber($content->number);
+
+                $regimeString = implode(',', $content->regime); // convert array to string
+                $allergieString = implode(',', $content->allergie);
+
+                $newUser->setRegimeUser($regimeString);
+                $newUser->setAllergieUser($allergieString);
+
+                $this->entityManager->persist($newUser);
+                $this->entityManager->flush();
+                return new JsonResponse(['message' => 'Opération réussie'], 200);
+            }
+        }
+        return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
+    }
+
 
 
 }

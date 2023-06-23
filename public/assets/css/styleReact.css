@@ -6,6 +6,12 @@
     margin-bottom: 1rem;
 }
 
+.titleAvis {
+    margin-top: 5rem;
+    padding: 1rem;
+    border-bottom: 1px lightgray solid;
+    width: 30%;
+}
 
 .avis-item {
     display: flex;
@@ -13,7 +19,7 @@
     justify-content: center;
     width: 30%;
     flex-direction: column;
-    margin-top: 4rem;
+    margin-bottom: 4rem;
     border-bottom: 1px lightgray solid;
     padding: 1rem;
 }
@@ -82,4 +88,123 @@
     padding: 10%;
 }
 
+
+.container-contact div:nth-child(6) {
+    width: 80%;
+    padding: 1rem;
+    overflow-wrap: break-word;
+}
+.container-contact div:nth-child(5) {
+    width: 80%;
+
+}
+
+.container-contact div:nth-child(5) div {
+    margin: 8px;
+}
+
+#login-react {
+    margin-top: 2rem;
+}
+
+#imgSignin {
+    float: left;
+    width: 30%;
+    background-color: #b6ddc7;
+    border-radius: 4rem 2rem 6rem 2rem;
+    rotate: -25deg;
+}
+
+#imgSignin img {
+    width: 100%;
+}
+
+#react-allergie-regime {
+    display: flex;
+
+}
+#react-allergie-regime div:nth-child(1) {
+    float: left;
+    width: 50%;
+}
+#react-allergie-regime div:nth-child(2) {
+    float: right;
+    width: 50%;
+}
+#label {
+    padding-left: 2rem;
+}
+
+.label {
+    font-size: 1.2rem !important;
+    margin-bottom: 1rem !important;
+}
+
+#checkbox1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grip-gap: 2rem;
+    width: 100% !important;
+    border-right: 1px solid lightgray;
+}
+#checkbox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grip-gap: 2rem;
+    width: 100% !important;
+    padding-left: 2rem;
+}
+
+/* MEDIA QUERRIES PHONE */
+
+@media (max-width: 767px) {
+    #contact-container {
+        display: flex;
+        flex-direction: column;
+    }
+    #react-allergie-regime {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #contact {
+        width: 100%;
+        float: none;
+        order: 1;
+    }
+
+    #title-contact {
+        margin-bottom: 2rem;
+    }
+    #imgContact, #imgSignin {
+        width: 60%;
+        float: none;
+        margin-top: 1.5rem;
+        order:2;
+    }
+
+
+    #email-input, #name-input, #phone-input, #objet-input{
+        border: 2px solid #6bffcf;
+        border-radius: 0.5rem;
+    }
+    .description-contact div div:nth-of-type(1) {
+        border: 2px solid #6bffcf;
+        border-radius: 0.5rem;
+    }
+    .description-contact div div:nth-of-type(1) fieldset {
+        border: none;
+    }
+
+    .container-contact fieldset {
+        border: none;
+    }
+
+    #button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
 

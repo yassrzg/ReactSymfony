@@ -82,6 +82,9 @@ export default function RatingRecetteId ({ recetteId }) {
 
     return(
         <div>
+            <div className="titleAvis">
+                <h4>Tous vos avis:</h4>
+            </div>
             {avis.map((avisItem) => (
                 <div key={avisItem.id} className="avis-item">
                     <StyledRating

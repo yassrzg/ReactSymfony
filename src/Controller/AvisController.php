@@ -27,25 +27,7 @@ class AvisController extends AbstractController
         $context = [
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => $h
         ];
-//        $user = $this->getUser();
-//        $regimes = $user->getRegime();
-//
-//        // je crée un nouveau tableau pour les recette
-//        $recettes = new ArrayCollection();
-//
-//        // je récupère toute les recette associé au régime de l'User
-//        foreach ($regimes as $regime) {
-//            $recettesRegime = $regime->getRecettes();
-//            // J'ajoute les recette lié au user dans la variable recette
-//            foreach ($recettesRegime as $recette) {
-////                $tempsPreparationString = $recette->getTempsPreparation()->format('H:i');
-////                $tempsReposString = $recette->getTempsRepos()->format('H:i');
-////                $tempsCuissonString = $recette->getTempsCuisson()->format('H:i');
-//
-//
-//                $recettes->add($recette);
-//            }
-//        }
+
         $user = $this->getUser();
         $regimes = $user->getRegime();
 

@@ -4,7 +4,10 @@
 
 {% block body %}
 
-
+    <div id="titleRecette" class="reveal-1">
+        <h2 class="reveal-1">Nos Recettes</h2>
+        <p class="reveal-2">Découvrez nos délicieuses recettes adaptées à différents régimes alimentaires. Que vous suiviez un régime végétarien, végétalien, sans gluten ou autre, nous avons des options savoureuses qui combleront vos papilles. Cependant, veuillez prendre note des précautions liées aux allergènes. Votre sécurité est primordiale, donc assurez-vous de vérifier attentivement les ingrédients utilisés dans nos recettes. Consultez un professionnel de la santé en cas de doute ou d'allergies spécifiques. Explorez nos recettes saines et savoureuses, conçues pour s'adapter à votre régime, et profitez d'une expérience culinaire sans compromis. Bon appétit !</p>
+    </div>
     <div id="container-Recette">
         {% for recette in recettes %}
             <a href="{{ path('app_recette_id', { 'id': recette.id }) }}" id="link-recette">
@@ -26,14 +29,16 @@
                                 <p>{{ recette.tempsCuisson|date('H:i') }} heure</p>
                             </div>
                         </div>
-                        <div class="allergie">
-                            <img src="{{ asset('Image/icons-attention.png') }}" alt="attention">
-                            <p>ALLERGIE</p>
-                        </div>
-                        <div class="container-allergie">
-                            {% for allergie in recette.Allergie %}
-                                <p>{{ allergie.name }}</p>
-                            {% endfor %}
+                        <div id="allergieRecette">
+                            <div class="allergie">
+                                <img src="{{ asset('Image/icons-attention.png') }}" alt="attention">
+                                <p>ALLERGIE</p>
+                            </div>
+                            <div class="container-allergie">
+                                {% for allergie in recette.Allergie %}
+                                    <p>{{ allergie.name }}</p>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     <div>

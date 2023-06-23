@@ -17,7 +17,7 @@ class Regime
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true, unique: true)]
-    #[Groups(['recette'])]
+    #[Groups(['recette', 'allergie'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Recette::class, mappedBy: 'Regime')]

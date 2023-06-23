@@ -43,6 +43,10 @@
 
 /* Balise html css */
 
+header {
+    height: 3.5rem;
+}
+
 p {
     font-family: 'Hind Madurai';
 }
@@ -60,6 +64,29 @@ body {
     padding: 0 !important;
     overflow-x: hidden;
     color: black !important;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+
+
+}
+
+#cgu-ml {
+    padding: 8%;
+}
+#cgu-ml h2 {
+    margin-bottom: 3rem;
+}
+
+#cgu-ml h4 {
+    margin-bottom: 1rem;
+}
+#cgu-ml p {
+    margin-bottom: 1rem;
+}
+
+#content-global {
+   padding-bottom: 15%;
 }
 
 
@@ -193,10 +220,34 @@ h2.description {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 
-.btn-contact button {
-    padding: 0.5rem 1rem;
+.btn-contact a:hover {
+    outline: none;
+    color: white;
+
+}
+
+.btn-home-contact {
+    border-radius: 0.5rem;
+    border: none;
+    background-color: #66b2cb;
+    padding: 1rem 1.5rem;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-home-contact svg {
+    margin-right: 0.5rem;
+    height: 1.2rem;
+}
+
+.btn-contact a {
+    outline: none;
+    text-decoration: none;
 }
 
 #offre {
@@ -259,9 +310,28 @@ h2.description {
 
 /* RECETTE */
 
-#container-recette {
-    padding: 0 7%;
+#allergieRecette {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
+
+
+#titleRecette {
+    margin-top: 7%;
+    padding: 0 8%;
+}
+
+#titleRecette h2 {
+    font-family: "Hind Madurai";
+}
+
+#titleRecette p {
+    text-align: justify;
+    font-family: Dancing;
+    font-size: 1.2rem;
 }
 
 /* RECETTE ID */
@@ -408,7 +478,7 @@ h2.description {
     grid-template-columns: repeat(3, 1fr); /* Crée 3 colonnes égales */
     grid-gap: 2rem; /* Espacement entre les éléments de la grille */
     padding: 0 8%;
-    margin-top: 10%;
+    margin-top: 5%;
 
 }
 
@@ -737,6 +807,7 @@ a {
     padding-left: 3rem;
 }
 
+
 .df-signin div {
     display: flex;
     align-items: flex-start;
@@ -797,22 +868,142 @@ a {
 
 
 
-.form-reservation-content {
-    box-shadow: 15px 15px 10px rgba(5, 5, 5, 0.3);
-    background-color: #ffffff;
-    border-radius: 0.5rem;
-    padding: 4rem 7rem;
+
+
+/* footer */
+
+footer {
+    background-color: #6c757d;
+    padding:1rem ;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 8.5rem;
+}
+footer ul {
+    margin-bottom: 0;
 }
 
+footer a:hover {
+    text-decoration: none;
+    color: black;
+}
+footer li {
+    margin-bottom: 1rem;
+}
+.footer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ul-container {
+    margin-right: 5rem;
+    list-style-type: none;
+}
 
+.ul-container a {
+    color: black;
+}
 
+.svg-logout {
+    width: 20px;
+    margin-right: 0.5rem;
+}
 
-
+@media (min-width: 767px) and (max-width: 1800px) {
+    #container-Recette {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grip-gap: 4rem;
+    }
+}
 
 
 /* MEDIA QUERRIES PHONE */
 
 @media (max-width: 767px) {
+
+    #container-Recette {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grip-gap: 4rem;
+        height: fit-content;
+        padding-top: 2rem;
+    }
+    header {
+        height: 5rem;
+    }
+
+    footer {
+        height: 3rem;
+    }
+
+    .ul-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0;
+    }
+
+    .ul-container li {
+        margin-right: 1rem;
+        margin-bottom: 0;
+    }
+
+    nav {
+        height: 100%;
+        padding: 0 !important;
+    }
+
+    nav div {
+        height: 100%;
+    }
+    #container-img-logo img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .navbarcontent {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: auto;
+        background-color: #343a40;
+        flex-direction: column;
+    }
+
+    .navbarcontent2 {
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .navbarcontent div:nth-of-type(1) {
+        height: 30%;
+        width: 100%;
+        padding-left: 1.5rem;
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+    }
+    .navbarcontent div:nth-of-type(1) a {
+        font-size: 0.8rem;
+    }
+    .svg-user {
+        width: 15px;
+    }
+
+    .svg-logout {
+        width: 15px;
+    }
+
+    .navbarcontent2 li {
+        margin-right: 2rem;
+    }
+    .navbarcontent2 li a {
+        font-size: 0.8rem;
+    }
 
     .title-home {
         font-size: 1rem;
@@ -824,13 +1015,16 @@ a {
     a {
         font-size: 0.6rem;
     }
-    .btn-voir-menu {
-        right: 25%;
-        padding: 0.7rem;
+
+    #logo .container-logo {
+        display: none;
     }
-    .btn-reservation {
-        padding: 0.7rem 1rem;
-        right: 5%;
+
+    #logo img {
+        display: none;
+    }
+    #logo {
+        display: none;
     }
 
     h2 {
@@ -840,9 +1034,6 @@ a {
         font-size: 1.5rem;
     }
 
-    .btn-reservation-acceuil, .btn-menu-acceuil {
-        font-size: 0.8rem;
-    }
 
 
     #navbar-phone {
@@ -861,14 +1052,74 @@ a {
         flex-direction: column;
         flex-wrap: wrap;
     }
+    #typewriter {
+        margin-bottom: 2rem;
+    }
+    #typewriter div {
+        text-align: center;
+    }
+   #container-presentation {
+       display: flex;
+       flex-direction: column;
+   }
 
-    .hours {
-        margin-bottom: 1rem;
-        margin-right: 2rem;
+    .img-presentation {
+        float: none;
+        width: 70%;
     }
-    .day-hours {
-        flex-wrap: wrap;
+    .img-presentation img {
+        width: 100%;
     }
+
+    .presentation {
+        width: 100%;
+        float: none;
+        margin-top: 2rem;
+    }
+
+    #container-contact-home {
+        flex-direction: column;
+    }
+
+    .img-contact {
+        order: 1;
+        width: 70%;
+        float: none;
+    }
+    .contact {
+        order: 2;
+        width: 100%;
+        float: none;
+        margin-right: 0;
+        margin-top: 2rem;
+    }
+    .contact p {
+        text-align: justify;
+    }
+
+    .btn-contact {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+    .btn-contact a {
+        font-size: 0.8rem;
+    }
+    #container-offre {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .container-icon {
+        width: 100%;
+    }
+    #reseaux-sociaux p {
+        text-align: justify !important;
+        padding: 0;
+    }
+    #container-home {
+        margin-top: 2rem;
+    }
+
+
     #form-login {
         width: 100%;
         padding: 30px 0;
