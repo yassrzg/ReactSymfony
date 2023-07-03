@@ -1,44 +1,54 @@
+
 import { useState, useEffect } from 'react';
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from "@mui/material/Button";
 import axios from "axios";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Input from "@mui/joy/Input";
+import Key from "@mui/icons-material/Key";
+import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/material/Typography";
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
-import imgSignin from '../../../public/Image/logo.png'
+import FormControl from "@mui/joy/FormControl";
+import FormLabel from "@mui/joy/FormLabel";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faHandDots } from '@fortawesome/free-solid-svg-icons';
+import { purple } from '@mui/material/colors';
+import { styled } from '@mui/material/styles';
+
 import '../../../public/assets/css/styleReact.css';
 
-import Input from '@mui/joy/Input';
-import LinearProgress from '@mui/joy/LinearProgress';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
+
+
 import Radio from '@mui/joy/Radio';
 import RadioGroup from '@mui/joy/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 
 
-import Key from '@mui/icons-material/Key';
+    const ColorButton = styled(Button)(({ theme }) => ({
+        color: theme.palette.getContrastText(purple[500]),
+        backgroundColor: purple[500],
+        '&:hover': {
+            backgroundColor: purple[700],
+        },
+    }));
 
-
-
-
-
-// ALERT
-
-const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-
-export default function Contact() {
+    const Alert = React.forwardRef(function Alert(props, ref) {
+        return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+    });
+export default function Account() {
 
     const [value, setValue] = useState('');
     const minLength = 12;
 
+
+
+    const [user, setUser] = useState([]);
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
     const [name, setName] = useState('');
@@ -53,6 +63,7 @@ export default function Contact() {
 
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [open, setOpen] = useState(false);
+    const [showElements, setShowElements] = useState(false);
 
 
 
@@ -65,16 +76,30 @@ export default function Contact() {
     const [selectedRegimes, setSelectedRegimes] = useState([]);
     const [selectedAllergies, setSelectedAllergies] = useState([]);
 
+
+    const handleButtonClick = () => {
+        setShowElements(!showElements);
+    };
+
     const handleAllergieChange = (event) => {
         const { value, checked } = event.target;
-        if (checked) {
-            setSelectedAllergies((prevSelectedAllergies) => [...prevSelectedAllergies, value]);
-        } else {
-            setSelectedAllergies((prevSelectedAllergies) =>
-                prevSelectedAllergies.filter((allergie) => allergie !== value)
-            );
-        }
+        setSelectedAllergies((prevSelectedAllergies) => {
+            if (checked) {
+                // Ajouter la valeur à la liste des allergies sélectionnées si elle n'est pas déjà présente
+                if (!prevSelectedAllergies.includes(value)) {
+                    return [...prevSelectedAllergies, value];
+                }
+            } else {
+                // Supprimer la valeur de la liste des allergies sélectionnées
+                return prevSelectedAllergies.filter((allergie) => allergie !== value);
+            }
+            return prevSelectedAllergies;
+        });
     };
+
+
+
+
 
     const handleRegimeChange = (event) => {
         const { value, checked } = event.target;
@@ -162,6 +187,27 @@ export default function Contact() {
 
     };
 
+    useEffect(() => {
+        axios
+            .get(`/api/getUser`)
+            .then((response) => {
+                // setUser(response.data);
+                const userData = response.data;
+                setUser(userData);
+                setEmail(userData.email || '');
+                setName(userData.firstname || '');
+                setSurname(userData.lastname || '');
+                setValue(userData.password);
+                setPhone(userData.phoneNumber || '');
+                setSelectedAllergies(userData.AllergieUser || []);
+                setSelectedRegimes(userData.RegimeUser || []);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+
     // SUBMIT
 
     function  handleSubmit (e){
@@ -183,7 +229,7 @@ export default function Contact() {
             setFormSubmitted(true);
             setOpen(true);
 
-            axios.post('/api/setUser', {
+            axios.post('/api/setNewDataUser', {
                 email: email,
                 name: name,
                 surname: surname,
@@ -211,22 +257,19 @@ export default function Contact() {
 
     }
 
-
     return(
-        <div id="register-react">
-            <div id="title-register">
-                <h2>Inscrire un patient</h2>
-                <div id="imgSignin">
-                    <img src={imgSignin} alt="contact-img" />
-                </div>
+        <div id="page-account">
+            <div id="account-title">
+                <h2>Mes Données</h2>
             </div>
             {!formSubmitted && (
-                <form id="form-register">
-                    <div className="register1">
+                <form id="form-account">
+                    <div className="container-contact">
                         <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
 
                             <TextField
-                                helperText="Please enter your email"
+                                color="secondary"
+                                focused
                                 id="email-input"
                                 label="E-mail"
                                 value={email}
@@ -238,19 +281,8 @@ export default function Contact() {
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
                             <TextField
-                                helperText="Please enter your surname"
-                                id="surname-input"
-                                label="Nom"
-                                value={surname}
-                                onChange={handleSurnameChange}
-                                error={Boolean(surnameError)}
-                                inputProps={{ pattern: surnameRegex.source }}
-                                fullWidth
-                            />
-                        </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
-                            <TextField
-                                helperText="Please enter your name"
+                                color="secondary"
+                                focused
                                 id="name-input"
                                 label="Prénom"
                                 value={name}
@@ -262,7 +294,21 @@ export default function Contact() {
                         </Box>
                         <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
                             <TextField
-                                helperText="Please enter your number phone"
+                                color="secondary"
+                                focused
+                                id="surname-input"
+                                label="Nom"
+                                value={surname}
+                                onChange={handleSurnameChange}
+                                error={Boolean(surnameError)}
+                                inputProps={{ pattern: surnameRegex.source }}
+                                fullWidth
+                            />
+                        </Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
+                            <TextField
+                                color="secondary"
+                                focused
                                 id="phone-input"
                                 label="Téléphone"
                                 value={phone}
@@ -272,8 +318,6 @@ export default function Contact() {
                                 fullWidth
                             />
                         </Box>
-                    </div>
-                    <div className="register2">
                         <Stack
                             spacing={0.5}
                             sx={{
@@ -282,7 +326,7 @@ export default function Contact() {
                         >
                             <Input
                                 type="password"
-                                placeholder="Type in here…"
+                                placeholder="Entrez votre mot de passe"
                                 startDecorator={<Key />}
                                 value={value}
                                 onChange={(event) => setValue(event.target.value)}
@@ -307,9 +351,27 @@ export default function Contact() {
                                 {!/^[a-zA-Z0-9]*$/.test(value) && ' - Must contain special characters'}
                             </Typography>
                         </Stack>
+                        <div id="data-account">
+                            <div id="regime-data">
+                                <FontAwesomeIcon icon={faUtensils} />
+                                <p>{selectedRegimes}</p>
+                            </div>
+                            <div id="allergie-data">
+                                <FontAwesomeIcon icon={faHandDots} />
+                                <p>{selectedAllergies}</p>
+                            </div>
+                        </div>
+                        <Stack direction="row" spacing={2} id="button-account">
+                            <ColorButton
+                                variant="contained"
+                                onClick={handleButtonClick}
+                            >Changer mes allergies & régimes</ColorButton>
+                        </Stack>
+
+                        {showElements && (
                         <div id="react-allergie-regime">
                             <FormControl>
-                                <FormLabel component="legend" className="label">Allergies</FormLabel>
+                                <FormLabel component="legend" className="label">Allergie</FormLabel>
                                 <div id="checkbox1">
                                     {allergie.map((allergieItem) => (
                                         <FormControlLabel
@@ -328,7 +390,7 @@ export default function Contact() {
                                 </div>
                             </FormControl>
                             <FormControl>
-                                <FormLabel id="label" className="label">Régimes</FormLabel>
+                                <FormLabel id="label" className="label">Régime</FormLabel>
                                 <div id="checkbox">
                                     {regime.map((regimeItem) => (
                                         <FormControlLabel
@@ -347,24 +409,23 @@ export default function Contact() {
                                 </div>
                             </FormControl>
                         </div>
+                        )}
+
+                        <Box sx={{ '& > :not(style)': { m: 1 }, width: '80%'}} id="button">
+                            <Button variant="contained" onClick={handleSubmit} id="submit-button">
+                                Sauvegarder
+                            </Button>
+                        </Box>
                     </div>
-
-                    <Box sx={{ '& > :not(style)': { m: 1 }, width: '80%'}} id="button-register">
-                        <Button variant="contained" onClick={handleSubmit} id="submit-button">
-                            Inscrire le patient
-                        </Button>
-                    </Box>
-
                 </form>
             )}
             <Stack spacing={2} sx={{ width: '100%' }}>
                 <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseNotification}>
                     <Alert onClose={handleCloseNotification} severity="success" sx={{ width: '100%' }}>
-                        Inscription reussi
+                        Donnée enregistré
                     </Alert>
                 </Snackbar>
             </Stack>
         </div>
-
-    );
+    )
 }

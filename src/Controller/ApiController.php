@@ -131,6 +131,34 @@ class ApiController extends AbstractController
         return new JsonResponse($jsonUser, Response::HTTP_OK, [], true);
     }
 
+    #[Route('/api/setNewDataUser', name: 'app_api_setNewDataUser')]
+    public function setNewDataUser( Request $request,UserPasswordHasherInterface $hashPassword): JsonResponse
+    {
+        $content = json_decode($request->getContent());
+        if($content != null) {
+            $user = $this->getUser();
+
+            $user->setEmail($content->email);
+
+            $user->setFirstname($content->name);
+            $user->setLastname($content->surname);
+            $password = $hashPassword->hashPassword($user,$content->password);
+            $user->setPassword($password);
+            $user->setPhoneNumber($content->number);
+
+            $regimeString = implode(',', $content->regime); // convert array to string
+            $allergieString = implode(',', $content->allergie);
+
+            $user->setRegimeUser($regimeString);
+            $user->setAllergieUser($allergieString);
+
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            return new JsonResponse(['message' => 'Opération réussie'], 200);
+        }
+        return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
+    }
+
 
 
 }

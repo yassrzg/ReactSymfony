@@ -99,20 +99,16 @@
 
 }
 
-.container-contact div:nth-child(5) div {
-    margin: 8px;
-}
+
 
 #login-react {
     margin-top: 2rem;
 }
 
 #imgSignin {
-    float: left;
-    width: 30%;
+    width: 40%;
     background-color: #b6ddc7;
     border-radius: 4rem 2rem 6rem 2rem;
-    rotate: -25deg;
 }
 
 #imgSignin img {
@@ -155,9 +151,112 @@
     padding-left: 2rem;
 }
 
+#data-account {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grip-gap: 2rem;
+    margin-bottom: 2rem;
+}
+#allergie-data  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#allergie-data p, #regime-data p {
+    margin-bottom: 0;
+    margin-left: 1rem;
+}
+
+#regime-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+#form-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+}
+
+#account-title {
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+}
+
+#button-account {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+#button-account button {
+    width: 40%;
+    overflow-wrap: normal;
+}
+
+
+#form-register {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 4rem;
+}
+
+#register-react {
+    padding: 5% 10%;
+}
+.register2 {
+    width: 80%;
+}
+
+#title-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 4rem;
+}
+
+#title-register h2 {
+    margin-bottom: 2rem;
+}
+
+#button-register {
+    width: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* MEDIA QUERRIES PHONE */
 
 @media (max-width: 767px) {
+
+
+    #form-register {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        grid-gap: 0;
+    }
+    #form-register div {
+        width: 100%;
+    }
     #contact-container {
         display: flex;
         flex-direction: column;
@@ -165,6 +264,32 @@
     #react-allergie-regime {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #react-allergie-regime div:nth-child(1), #react-allergie-regime div:nth-child(2) {
+        float: none;
+        width: 100%;
+        padding-left: 2rem;
+    }
+    #react-allergie-regime div:nth-child(1){
+        margin-bottom: 2rem;
+    }
+    .register2 > div:nth-of-type(1) {
+        padding: 8px;
+    }
+    #button-register {
+        margin-top: 2rem;
+    }
+
+    #label {
+        padding-left: 0;
+    }
+    #checkbox1 {
+        border: none;
+    }
+    #checkbox {
+        padding-left: 0;
     }
 
     #contact {
@@ -172,21 +297,36 @@
         float: none;
         order: 1;
     }
+    #register-react {
+        padding: 10%;
+    }
 
     #title-contact {
         margin-bottom: 2rem;
     }
-    #imgContact, #imgSignin {
+    #imgContact {
         width: 60%;
+        float: none;
+        margin-top: 1.5rem;
+        order:2;
+    }
+    #imgSignin {
+        width: 100%;
         float: none;
         margin-top: 1.5rem;
         order:2;
     }
 
 
-    #email-input, #name-input, #phone-input, #objet-input{
+    #email-input, #name-input, #phone-input, #objet-input, #surname-input{
         border: 2px solid #6bffcf;
         border-radius: 0.5rem;
+    }
+
+    .register2 > div:nth-of-type(1) > div:nth-of-type(1) {
+        border: 2px solid #6bffcf;
+        border-radius: 0.5rem;
+        padding: 0.9rem;
     }
     .description-contact div div:nth-of-type(1) {
         border: 2px solid #6bffcf;
