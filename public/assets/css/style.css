@@ -911,6 +911,15 @@ footer li {
     margin-right: 0.5rem;
 }
 
+
+#account-setting {
+    display:flex;
+    flex-direction:column;
+    padding: 5% 10%;
+
+
+}
+
 @media (min-width: 767px) and (max-width: 1800px) {
     #container-Recette {
         display: grid;

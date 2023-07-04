@@ -3,5 +3,8 @@
 {% block title %}Hello AccountController!{% endblock %}
 
 {% block body %}
-    <div {{ react_component('Account') }} ></div>
+    <div id="account-setting">
+        <div {{ react_component('Account') }} ></div>
+        <div {{ react_component('AccountPassword') }} ></div>
+    </div>
 {% endblock %}

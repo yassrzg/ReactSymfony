@@ -146,11 +146,21 @@ class ApiController extends AbstractController
             $user->setPassword($password);
             $user->setPhoneNumber($content->number);
 
-            $regimeString = implode(',', $content->regime); // convert array to string
-            $allergieString = implode(',', $content->allergie);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+            return new JsonResponse(['message' => 'Opération réussie'], 200);
+        }
+        return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
+    }
+    #[Route('/api/setNewDataUserPassword', name: 'app_api_setNewDataUserPassword')]
+    public function setNewDataUserPassword( Request $request,UserPasswordHasherInterface $hashPassword): JsonResponse
+    {
+        $content = json_decode($request->getContent());
+        if($content != null) {
+            $user = $this->getUser();
 
-            $user->setRegimeUser($regimeString);
-            $user->setAllergieUser($allergieString);
+            $password = $hashPassword->hashPassword($user,$content->password);
+            $user->setPassword($password);
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();

@@ -176,8 +176,6 @@
 
 #page-account {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     width: 100%;
 }
@@ -187,7 +185,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 60%;
+    width: 100%;
 }
 
 #account-title {
@@ -240,6 +238,60 @@
     justify-content: center;
     align-items: center;
 }
+
+.password {
+    margin-top:1rem;
+    margin-bottom: 2rem;
+}
+.confirmPassword {
+    margin-bottom: 1rem;
+}
+
+.account-setting-message {
+    height:2rem;
+}
+
+#box-modal {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    width:400px;
+    border-radius:1rem;
+    padding:2rem;
+    background-color: white;
+}
+
+#password, #confirm-password {
+    border-width: 2px;
+    border-color: #9c27b0;
+}
+.p-inputtext:enabled:focus {
+    box-shadow: none;
+    border-color: #9c27b0;
+}
+
+#modal-account > button:nth-child(1){
+    padding:1rem 2rem;
+    background-color:whitesmoke;
+    border-radius:0.5rem;
+    margin-bottom:2rem;
+}
+
+#modal-account2 > button:nth-child(1){
+    padding:1rem 2rem;
+    background-color:whitesmoke;
+    border-radius:0.5rem;
+}
+
+#modal-account2 > button:nth-child(1):hover {
+
+}
+
+
+
+
+
 
 /* MEDIA QUERRIES PHONE */
 
@@ -347,4 +399,6 @@
     }
 
 }
+
+
 
