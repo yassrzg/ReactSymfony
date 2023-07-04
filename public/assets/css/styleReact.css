@@ -87,13 +87,6 @@
 #contact-react {
     padding: 10%;
 }
-
-
-.container-contact div:nth-child(6) {
-    width: 80%;
-    padding: 1rem;
-    overflow-wrap: break-word;
-}
 .container-contact div:nth-child(5) {
     width: 80%;
 
@@ -139,7 +132,6 @@
 #checkbox1 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grip-gap: 2rem;
     width: 100% !important;
     border-right: 1px solid lightgray;
 }
@@ -154,7 +146,7 @@
 #data-account {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grip-gap: 2rem;
+    margin-top:2rem;
     margin-bottom: 2rem;
 }
 #allergie-data  {
@@ -284,8 +276,55 @@
     border-radius:0.5rem;
 }
 
-#modal-account2 > button:nth-child(1):hover {
+#modal-account2 > button:nth-child(1):hover, #modal-account > button:nth-child(1):hover {
+    background-color: darkseagreen;
+}
 
+#button-setting {
+    display:flex;
+    justify-content: space-evenly;
+}
+
+
+#close-button {
+    background-color:red;
+}
+
+#submit-button-account {
+    background-color:green;
+}
+
+.title-setting-account {
+    margin-bottom: 1rem;
+    margin-top:1rem;
+}
+
+.password-register, .confirmPassword-register {
+    width:80%
+}
+
+.password-container-register > div, .confirmPassword-container-register > div {
+    width:100%
+}
+
+.password-container-register > div > input, .confirmPassword-container-register > div > input {
+    width:100%;
+}
+
+.password-register {
+    margin-bottom :2rem;
+
+}
+
+#password-Register , #confirm-password-Register {
+    height: 1.4375em;
+    padding: 16.5px 14px;
+    box-sizing: content-box;
+}
+
+#react-allergie-regime-register {
+    display:flex;
+    margin-top:2rem;
 }
 
 
@@ -330,6 +369,12 @@
     .register2 > div:nth-of-type(1) {
         padding: 8px;
     }
+    .register2 > div:nth-of-type(2) {
+        padding: 8px;
+    }
+    .password-register {
+        margin-bottom:1rem;
+    }
     #button-register {
         margin-top: 2rem;
     }
@@ -368,9 +413,29 @@
         margin-top: 1.5rem;
         order:2;
     }
+    #react-allergie-regime-register {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        padding:8px;
+    }
+
+    #react-allergie-regime-register > div:nth-child(1), #react-allergie-regime-register > div:nth-child(2) {
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+    }
+
+    #react-allergie-regime-register > div:nth-child(1) {
+        margin-bottom:2rem;
+    }
 
 
-    #email-input, #name-input, #phone-input, #objet-input, #surname-input{
+
+
+    #email-input, #name-input, #phone-input, #objet-input, #surname-input, #password-Register , #confirm-password-Register{
         border: 2px solid #6bffcf;
         border-radius: 0.5rem;
     }
@@ -397,6 +462,11 @@
         justify-content: center;
         align-items: center;
     }
+
+    .titleAvis, .avis-item {
+        width:100%
+    }
+
 
 }
 

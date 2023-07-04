@@ -96,13 +96,12 @@ export default function Account() {
                     aria-describedby="modal-modal-description"
                 >
                     <Box id="box-modal">
-                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                            Changer mon mot de passe
-                        </Typography>
-                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                            <form id="form-account">
-                                <div className="container-contact">
-                                    <div className="password">
+                        <form id="form-account">
+                            <div className="title-setting-account">
+                                <h4>Changer mon mot de passe</h4>
+                            </div>
+                            <div className="container-contact">
+                                <div className="password">
                                          <span className="p-float-label">
                                             <Password
                                                 inputId="password"
@@ -112,8 +111,8 @@ export default function Account() {
                                             />
                                             <label htmlFor="password">Password</label>
                                          </span>
-                                    </div>
-                                    <div className="confirmPassword">
+                                </div>
+                                <div className="confirmPassword">
                                         <span className="p-float-label">
                                             <Password
                                                 inputId="confirm-password"
@@ -123,20 +122,22 @@ export default function Account() {
                                             />
                                             <label htmlFor="password">Confirm Password</label>
                                         </span>
-                                    </div>
-                                    <div className="account-setting-message">
-                                        {passwordError && <p className="error-message">{passwordError}</p>}
-                                    </div>
-
-
-                                    <Box sx={{ '& > :not(style)': { m: 1 }, width: '80%' }} id="button">
-                                        <Button variant="contained" onClick={handleSubmit} id="submit-button">
-                                            Sauvegarder
-                                        </Button>
-                                    </Box>
                                 </div>
-                            </form>
-                        </Typography>
+                                <div className="account-setting-message">
+                                    {passwordError && <p className="error-message">{passwordError}</p>}
+                                </div>
+
+
+                                <Box sx={{ '& > :not(style)': { m: 1 }, width: '100%' }} id="button-setting">
+                                    <Button variant="contained" onClick={handleSubmit} id="submit-button-account">
+                                        Sauvegarder
+                                    </Button>
+                                    <Button variant="contained" onClick={handleCloseModal} id="close-button">
+                                        fermer
+                                    </Button>
+                                </Box>
+                            </div>
+                        </form>
                     </Box>
                 </Modal>
             </div>

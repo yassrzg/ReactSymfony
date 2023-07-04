@@ -4,24 +4,18 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 import axios from "axios";
-import Typography from "@mui/material/Typography";
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import imgSignin from '../../../public/Image/logo.png'
 import '../../../public/assets/css/styleReact.css';
-
-import Input from '@mui/joy/Input';
-import LinearProgress from '@mui/joy/LinearProgress';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
-import Radio from '@mui/joy/Radio';
-import RadioGroup from '@mui/joy/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-
-
-import Key from '@mui/icons-material/Key';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
+import {Password} from "primereact/password";
 
 
 
@@ -36,8 +30,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 export default function Contact() {
 
-    const [value, setValue] = useState('');
-    const minLength = 12;
+
 
     const [email, setEmail] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -51,11 +44,14 @@ export default function Contact() {
     const [allergie, setAllergie] = useState([]);
     const [regime, setRegime] = useState([]);
 
-    const [formSubmitted, setFormSubmitted] = useState(false);
     const [open, setOpen] = useState(false);
 
+    const [password, setPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
 
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[a-zA-Z\d!@#$%^&*()]{8,}$/;
     const emailRegex = /^\S+@\S+\.\S+$/;
     const phoneRegex = /^\d{10}$/;
     const nameRegex = /^[a-zA-Z]+$/;
@@ -153,6 +149,16 @@ export default function Contact() {
         }
     }
 
+    function handleConfirmPasswordChange(event) {
+        const confirmationPassword = event.target.value;
+        setConfirmPassword(confirmationPassword);
+        if (password !== confirmationPassword) {
+            setPasswordError('Les mots de passe ne correspondent pas.');
+        } else {
+            setPasswordError('');
+        }
+    }
+
     const handleCloseNotification = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -177,17 +183,24 @@ export default function Contact() {
         if(!phone) {
             setPhoneError('Entrez votre numéro de tel')
         }
+        if (!passwordRegex.test(password)) {
+            setPasswordError('Veuillez utiliser des caractères spéciaux et 8 carractère minimum');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setPasswordError('Les mots de passe ne correspondent pas');
+            return;
+        }
 
 
-        if(email && name ) {
-            setFormSubmitted(true);
+        if(email && name && phone && password ) {
             setOpen(true);
 
             axios.post('/api/setUser', {
                 email: email,
                 name: name,
                 surname: surname,
-                password: value,
+                password: password,
                 number: phone,
                 allergie: selectedAllergies,
                 regime: selectedRegimes,
@@ -196,7 +209,7 @@ export default function Contact() {
                 setEmail('');
                 setName('');
                 setSurname('');
-                setValue('');
+                setPassword('');
                 setPhone('');
                 setSelectedAllergies([]);
                 setSelectedRegimes([]);
@@ -220,7 +233,6 @@ export default function Contact() {
                     <img src={imgSignin} alt="contact-img" />
                 </div>
             </div>
-            {!formSubmitted && (
                 <form id="form-register">
                     <div className="register1">
                         <Box sx={{ display: 'flex', alignItems: 'center', width: '80%', '& > :not(style)': { m: 1 } }}>
@@ -274,40 +286,32 @@ export default function Contact() {
                         </Box>
                     </div>
                     <div className="register2">
-                        <Stack
-                            spacing={0.5}
-                            sx={{
-                                '--hue': Math.min(value.length * 10, 120),
-                            }}
-                        >
-                            <Input
-                                type="password"
-                                placeholder="Type in here…"
-                                startDecorator={<Key />}
-                                value={value}
-                                onChange={(event) => setValue(event.target.value)}
-                            />
-                            <LinearProgress
-                                determinate
-                                size="sm"
-                                value={Math.min((value.length * 100) / minLength, 100)}
-                                sx={{
-                                    bgcolor: 'background.level3',
-                                    color: 'hsl(var(--hue) 80% 40%)',
-                                }}
-                            />
-                            <Typography
-                                level="body3"
-                                sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
-                            >
-                                {value.length < 3 && 'Very weak'}
-                                {value.length >= 3 && value.length < 6 && 'Weak'}
-                                {value.length >= 6 && value.length < 10 && 'Strong'}
-                                {value.length >= 10 && 'Very strong'}
-                                {!/^[a-zA-Z0-9]*$/.test(value) && ' - Must contain special characters'}
-                            </Typography>
-                        </Stack>
-                        <div id="react-allergie-regime">
+                        <div className="password-register">
+                                         <span className="p-float-label password-container-register">
+                                            <Password
+                                                inputId="password-Register"
+                                                value={password}
+                                                onChange={(event) => setPassword(event.target.value)}
+                                                toggleMask
+                                            />
+                                            <label htmlFor="password">Password</label>
+                                         </span>
+                        </div>
+                        <div className="confirmPassword-register">
+                                        <span className="p-float-label confirmPassword-container-register">
+                                            <Password
+                                                inputId="confirm-password-Register"
+                                                value={confirmPassword}
+                                                onChange={handleConfirmPasswordChange}
+                                                toggleMask
+                                            />
+                                            <label htmlFor="password">Confirm Password</label>
+                                        </span>
+                        </div>
+                        <div className="account-setting-message">
+                            {passwordError && <p className="error-message">{passwordError}</p>}
+                        </div>
+                        <div id="react-allergie-regime-register">
                             <FormControl>
                                 <FormLabel component="legend" className="label">Allergies</FormLabel>
                                 <div id="checkbox1">
@@ -356,11 +360,10 @@ export default function Contact() {
                     </Box>
 
                 </form>
-            )}
             <Stack spacing={2} sx={{ width: '100%' }}>
                 <Snackbar open={open} autoHideDuration={3000} onClose={handleCloseNotification}>
                     <Alert onClose={handleCloseNotification} severity="success" sx={{ width: '100%' }}>
-                        Inscription reussi
+                        Inscription reussi !
                     </Alert>
                 </Snackbar>
             </Stack>

@@ -911,6 +911,10 @@ footer li {
     margin-right: 0.5rem;
 }
 
+.note > div > p.padding1 {
+    margin-bottom:0;
+}
+
 
 #account-setting {
     display:flex;
@@ -1160,6 +1164,31 @@ footer li {
         text-align: center;
         margin: auto;
         margin-top: 1rem;
+    }
+
+    #recette-id {
+
+    }
+
+    #container-recette-id{
+        flex-direction : column;
+    }
+    .container-img-recette {
+        width:100%;
+        margin-bottom:2rem;
+        float:none;
+    }
+    .container-recette-description {
+        width:100%;
+        float:none;
+    }
+
+    .description-recette-div > p {
+        margin-bottom: 2rem;
+        text-align:justify;
+    }
+    .recette-etape, .recette-allergie, .recette-ingredient  {
+        flex-wrap:wrap;
     }
 
 
