@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\Avis;
 use App\Entity\Contact;
 use App\Entity\Recette;
@@ -61,15 +62,23 @@ class ApiController extends AbstractController
         $content = json_decode($request->getContent());
         if($content != null) {
 
-        $newContact = new Contact();
-        $newContact->setEmail($content->email);
-        $newContact->setName($content->name);
-        $newContact->setObjet($content->objet);
-        $newContact->setDescription($content->description);
-        $newContact->setPhoneNumber($content->number);
+            $newContact = new Contact();
+            $newContact->setEmail($content->email);
+            $newContact->setName($content->name);
+            $newContact->setObjet($content->objet);
+            $newContact->setDescription($content->description);
+            $newContact->setPhoneNumber($content->number);
 
-        $this->entityManager->persist($newContact);
-        $this->entityManager->flush();
+            $this->entityManager->persist($newContact);
+            $this->entityManager->flush();
+            $email = new Mail();
+            $subject = 'Email envoyé!';
+            $emailUser = $content->email;
+            $passwordUser = $content->password;
+            $contentMail = 'Merci pour votre message <br/><br/><br/> Nous reviendrons vers vous rapidement <br/><br/><br/> Ceci est un mail automatique merci de ne pas y répondre';
+            $name_content = $content->name;
+            $sujet = 'Nous avons bien reçu votre message';
+            $email->send($content->email, $content->name, $subject, $contentMail, $name_content, $sujet);
             return new JsonResponse(['message' => 'Opération réussie'], 200);
         }
         return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
@@ -114,6 +123,15 @@ class ApiController extends AbstractController
 
                 $this->entityManager->persist($newUser);
                 $this->entityManager->flush();
+                $email = new Mail();
+                $subject = 'Inscription réussi!';
+                $emailUser = $content->email;
+                $passwordUser = $content->password;
+                $contentMail = 'Votre compte a été crée avec succès <br/><br/><br/> Pensez à changer votre mot de passe rapidement <br/><br/><br/> Email: ' . $emailUser . '<br/><br/> Password :' . $passwordUser . '<br/><br/><br/><br/><br/> Vous pouvez utiliser le liens ci-dessous pour accédez au site';
+                $name_content = $content->name;
+                $sujet = 'Inscription réussi !';
+                $email->send($content->email, $content->name, $subject, $contentMail, $name_content, $sujet);
+
                 return new JsonResponse(['message' => 'Opération réussie'], 200);
             }
         }

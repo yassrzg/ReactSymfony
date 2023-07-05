@@ -210,6 +210,7 @@ export default function Contact() {
                 setName('');
                 setSurname('');
                 setPassword('');
+                setConfirmPassword('');
                 setPhone('');
                 setSelectedAllergies([]);
                 setSelectedRegimes([]);

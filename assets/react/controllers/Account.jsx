@@ -185,9 +185,6 @@ export default function Account() {
 
     return(
         <div id="page-account">
-            <div id="account-title">
-                <h2>Mes Données</h2>
-            </div>
             <div id="modal-account">
                 <Button onClick={handleOpenModal}>Changer mes données personnelles</Button>
                 <Modal

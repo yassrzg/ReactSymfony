@@ -4,7 +4,18 @@
 
 {% block body %}
     <div id="account-setting">
+        <div class="account-title">
+            <h2>Bienvenue sur votre compte {{ app.user.firstname }}</h2>
+        </div>
         <div {{ react_component('Account') }} ></div>
         <div {{ react_component('AccountPassword') }} ></div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="container-btn-admin">
+                <a href="/admin" role="button" class="button-admin">Accédez à la page Admin</a>
+            </div>
+            <div class="container-btn-admin">
+                <a href="/register" role="button" class="button-admin">Inscrire un patient</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
