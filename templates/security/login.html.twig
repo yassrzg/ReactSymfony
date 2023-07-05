@@ -35,6 +35,7 @@
                     <button class="button-1-login" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span></span></button>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </div>
+                <a href="{{ path('app_reset_password') }}" class="button-3-login text-center">Forgot Password</a>
 
             </div>
         </form>

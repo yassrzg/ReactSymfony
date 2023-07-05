@@ -656,7 +656,25 @@ h2.description {
 
 
 
+.button-3-login{
+    width: 30%;
+    margin-top:2rem;
+    margin-bottom:20px;
+    padding: 12px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-color: #b90202;
+    color: white;
+}
 
+.button-3-login:hover {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    outline: none;
+}
 
 
 .button-1-login {
@@ -1255,5 +1273,9 @@ footer li {
         flex-wrap:wrap;
     }
 
+    .button-3-login {
+        width: 40%;
+        margin-top:1rem;
+    }
 
 }
