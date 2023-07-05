@@ -6,6 +6,7 @@ use App\Classe\Mail;
 use App\Entity\Avis;
 use App\Entity\Contact;
 use App\Entity\Recette;
+use App\Entity\ResetPassword;
 use App\Entity\User;
 use App\Repository\AllergieRepository;
 use App\Repository\AvisRepository;
@@ -73,8 +74,6 @@ class ApiController extends AbstractController
             $this->entityManager->flush();
             $email = new Mail();
             $subject = 'Email envoyé!';
-            $emailUser = $content->email;
-            $passwordUser = $content->password;
             $contentMail = 'Merci pour votre message <br/><br/><br/> Nous reviendrons vers vous rapidement <br/><br/><br/> Ceci est un mail automatique merci de ne pas y répondre';
             $name_content = $content->name;
             $sujet = 'Nous avons bien reçu votre message';
@@ -182,6 +181,31 @@ class ApiController extends AbstractController
 
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+            return new JsonResponse(['message' => 'Opération réussie'], 200);
+        }
+        return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);
+    }
+
+    #[Route('/api/updatePassword/{token}', name: 'app_api_updatePassword')]
+    public function updatePassword( Request $request,UserPasswordHasherInterface $hashPassword, $token): JsonResponse
+    {
+        $reset_password = $this->entityManager->getRepository(ResetPassword::class)->findOneByToken($token);
+
+        $content = json_decode($request->getContent());
+        if($content != null) {
+
+            $password = $hashPassword->hashPassword($reset_password->getUser(),$content->password);
+            $reset_password->getUser()->setPassword($password);
+
+            $this->entityManager->flush();
+
+            $email = new Mail();
+            $subject = 'Changement de mot de passe réussi!';
+            $contentMail = "Votre mot de passe a été changé avec succès <br/><br/><br/> Si vous n'êtes pas à l'origine de cette demande, veuillez nous contacter rapidement <br/><br/><br/> Ceci est un mail automatique, merci de ne pas y répondre<br/><br/><br/><br/><br/> Vous pouvez utiliser le liens ci-dessous pour accédez au site pour nous contacter";
+            $name_content = $content->name;
+            $sujet = 'Vous venez de changer votre mots !';
+            $email->send($content->email, $content->name, $subject, $contentMail, $name_content, $sujet);
+
             return new JsonResponse(['message' => 'Opération réussie'], 200);
         }
         return new JsonResponse(['message' => 'Erreur dans les données fournies'], 400);

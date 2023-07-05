@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div id="reset-password">
+        <h2>Réinitialiser mon mot de passe</h2>
+    </div>
+    <div id="form-login-reset">
+        <div {{ react_component('ResetPassword', {token: token}) }}></div>
+    </div>
+
+
+{% endblock %}

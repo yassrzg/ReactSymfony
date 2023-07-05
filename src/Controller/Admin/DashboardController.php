@@ -50,19 +50,19 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('ReactSymfony');
+            ->setTitle('Diète');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Acceuil', 'fa fa-home');
         yield MenuItem::linkToCrud('Patient', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Régime', 'fas fa-list', Regime::class);
+        yield MenuItem::linkToCrud('Régime', 'fa fa-bowl-food', Regime::class);
         yield MenuItem::linkToCrud('Etapes', 'fas fa-list', Etapes::class);
-        yield MenuItem::linkToCrud('Ingredient', 'fas fa-star', Ingredient::class);
+        yield MenuItem::linkToCrud('Ingredient', 'fa fa-egg', Ingredient::class);
         yield MenuItem::linkToCrud('Recette', 'fa-solid fa-utensils', Recette::class);
         yield MenuItem::linkToCrud("Liste d'allergies", 'fa fa-hand-dots', Allergie::class);
         yield MenuItem::linkToCrud('Avis', 'fas fa-star', Avis::class);
-        yield MenuItem::linkToCrud('Contact', 'fas fa-star', Contact::class);
+        yield MenuItem::linkToCrud('Contact', 'fa fa-address-book', Contact::class);
     }
 }

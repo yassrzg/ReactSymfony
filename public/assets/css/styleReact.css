@@ -329,7 +329,78 @@
 
 
 
+.container-resetPassword {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
 
+.reset-password {
+    margin-right:2rem;
+}
+
+#button-resetPassword {
+    display:flex;
+    margin-top:3rem;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+#submit-button-resetPassword {
+
+    position: relative;
+    display: inline-block;
+    padding: 10px 0;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s ease-in-out;
+    letter-spacing: 4px;
+    margin-right: 15px;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    width: 40%;
+}
+
+#submit-button-resetPassword:hover {
+
+    background: #03f40f;
+    color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #03f40f,
+    0 0 25px #03f40f,
+    0 0 50px #03f40f,
+    0 0 100px #03f40f;
+}
+
+#submit-button-resetPassword span {
+    position: absolute;
+    display: block;
+}
+
+@keyframes btn-anim1 {
+    0% {
+        left: -100%;
+    }
+
+    50%,100% {
+        left: 100%;
+    }
+}
+
+#submit-button-resetPassword span:nth-child(1) {
+    bottom: 0px;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #03f40f);
+    animation: btn-anim1 4s linear infinite;
+}
 
 
 /* MEDIA QUERRIES PHONE */
@@ -467,6 +538,22 @@
         width:100%
     }
 
+    .container-resetPassword {
+        flex-direction:column;
+    }
+    .reset-password {
+        margin-right:0;
+        margin-bottom:2rem;
+    }
+
+    #button-resetPassword {
+        margin-top:0;
+        margin-bottom:2rem;
+    }
+    #submit-button-resetPassword {
+        width:60%;
+        font-size:12px;
+    }
 
 }
 
